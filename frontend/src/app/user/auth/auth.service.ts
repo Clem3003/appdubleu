@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:8080/api';
+  private readonly API_URL = 'http://localhost:8080/api/auth';
   private readonly TOKEN_KEY = 'jwt_token';
 
   constructor(private http: HttpClient) {}
