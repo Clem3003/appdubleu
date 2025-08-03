@@ -34,7 +34,7 @@ const childrenRoutes: Routes = [
 export const FEATURES_ROUTES: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [...childrenRoutes, ...defaultRoutes],
     component: Features,
   }
