@@ -2,7 +2,8 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputText } from 'primeng/inputtext';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
+import {LoginManager} from '../login.manager';
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +17,7 @@ import { AuthService } from '../../auth/auth.service';
 export class LoginForm implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   protected form!: FormGroup;
-  private authService = inject(AuthService);
+  private manager = inject(LoginManager);
   private readonly router = inject(Router);
 
   ngOnInit() {
@@ -40,10 +41,9 @@ export class LoginForm implements OnInit, OnDestroy {
     const username = this.form.get('username')?.value;
     const password = this.form.get('password')?.value;
 
-    this.authService.login(username, password).subscribe({
+    this.manager.login(username, password).subscribe({
       next: (res) => {
-        this.authService.saveToken(res.token);
-        console.log('Success', res.token);
+        console.log('Success', res.token); // TODO : Remove this
         this.router.navigate(['/']);
       },
       error: (err) => {

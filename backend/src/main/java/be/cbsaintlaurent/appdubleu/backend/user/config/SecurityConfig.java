@@ -1,4 +1,4 @@
-package be.cbsaintlaurent.appdubleu.backend.user.service;
+package be.cbsaintlaurent.appdubleu.backend.user.config;
 
 import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
 import lombok.RequiredArgsConstructor;
