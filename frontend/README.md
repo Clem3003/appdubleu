@@ -2,6 +2,35 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.4.
 
+# \> Docker
+
+## Node
+```bash
+  npm install
+```
+## Angular build
+```bash
+  npm run build --prod
+```
+## Build image
+```dockerfile
+docker build . -t appdubleu-frontend
+```
+## Run container
+```dockerfile
+docker run -p 4200:80 --name appdubleu-frontend -d appdubleu-frontend
+```
+## Check running containers
+```dockerfile
+docker ps
+```
+## Open browser
+```http request
+http://localhost:4200/
+```
+
+# Other
+
 ## Development server
 
 To start a local development server, run:

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>be.cbsaintlaurent.appdubleu</groupId>
 	<artifactId>backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>backend</name>
 	<description>CB Saint-Laurent - App du bleu</description>
 	<url/>
@@ -69,7 +69,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<scope>provided</scope>
+			<version>1.18.32</version>
 		</dependency>
 
 	</dependencies>
@@ -104,6 +105,23 @@
 						<version>${jakarta-validation.version}</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<!-- Lombok annotation processing plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>1.18.32</version>
+						</path>
+					</annotationProcessorPaths>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

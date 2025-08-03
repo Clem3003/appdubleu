@@ -1,4 +1,4 @@
-package be.cbsaintlaurent.appdubleu.backend.user.repository;
+package be.cbsaintlaurent.appdubleu.backend.user.service;
 
 import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Toujours un bon choix pour hasher les mots de passe
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -49,17 +49,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable() // À adapter selon ton cas (par ex. activer pour API REST + tokens JWT)
+                .csrf(csrf -> csrf.disable()) // désactive la protection CSRF pour les appels API
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**").permitAll() // URL publiques
-                        .anyRequest().authenticated() // tout le reste est sécurisé
+                        .requestMatchers("/api/login").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin() // page login par défaut (tu peux customiser)
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
-                .permitAll();
+                .formLogin(login -> login.disable())
+                .httpBasic(basic -> basic.disable());
 
         return http.build();
     }
