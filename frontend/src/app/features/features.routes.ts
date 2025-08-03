@@ -13,7 +13,10 @@ const defaultRoutes: Routes = [
 ];
 
 const childrenRoutes: Routes = [
-    { path: '', component: Dashboard },
+    { path: 'dashboard', component: Dashboard },
+    { path: 'folklore', component: Dashboard },
+    { path: 'forum', component: Dashboard },
+    { path: 'profile', component: Dashboard },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },

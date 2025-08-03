@@ -18,21 +18,22 @@
   <ng-content />
 
   <div class="fixed flex align-items-center justify-content-around pt-2 bottom-0 h-5rem w-full bg-gray-50">
-    <div class="flex flex-column align-items-center justify-content-center col-2">
-      <div><i class="far fa-home text-2xl"></i></div>
+    <a routerLink="/dashboard" class="flex flex-column align-items-center justify-content-center col-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <i [ngClass]="{'fas fa-home text-2xl': isActive('/dashboard'), 'far fa-home text-2xl': !isActive('/dashboard')}"></i>
       <div class="text-xs text-700">Accueil</div>
-    </div>
-    <div class="flex flex-column align-items-center justify-content-center col-2">
-      <div><i class="fa-regular fa-newspaper text-2xl"></i></div>
+    </a>
+    <a routerLink="/folklore" class="flex flex-column align-items-center justify-content-center col-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <i [ngClass]="{'fas fa-newspaper text-2xl': isActive('/folklore'), 'far fa-newspaper text-2xl': !isActive('/folklore')}"></i>
       <div class="text-xs text-700">Folklore</div>
-    </div>
-    <div class="flex flex-column align-items-center justify-content-center col-2">
-      <div><i class="far fa-envelope text-2xl"></i></div>
+    </a>
+    <a routerLink="/forum" class="flex flex-column align-items-center justify-content-center col-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <i [ngClass]="{'fas fa-envelope text-2xl': isActive('/forum'), 'far fa-envelope text-2xl': !isActive('/forum')}"></i>
       <div class="text-xs text-700">Messages</div>
-    </div>
-    <div class="flex flex-column align-items-center justify-content-center col-2">
-      <div><i class="far fa-user text-2xl"></i></div>
+    </a>
+    <a routerLink="/profile" class="flex flex-column align-items-center justify-content-center col-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <i [ngClass]="{'fas fa-user text-2xl': isActive('/profile'), 'far fa-user text-2xl': !isActive('/profile')}"></i>
       <div class="text-xs text-700">Profil</div>
-    </div>
+    </a>
   </div>
+
   <!-- Footer -->
