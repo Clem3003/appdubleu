@@ -19,6 +19,7 @@ public class StLoUserService {
 
     private final StLoUserRepository userRepository;
     private final PasswordEncoder passwordEncoder; // pour encoder les mots de passe
+    private final JwtService jwtService;
 
     @Transactional
     public boolean existsByUsername(String username) {
@@ -52,6 +53,24 @@ public class StLoUserService {
             return null; // Password incorrect
         }
         return user.get();
+    }
+
+    @Transactional
+    public String loginAndGetToken(String username, String password) {
+        Optional<StLoUser> user = userRepository.findByUsername(username);
+        if (user.isEmpty() || !user.get().isEnabled()) {
+            return null;
+        }
+        if (!passwordEncoder.matches(password, user.get().getPassword())) {
+            return null;
+        }
+
+        StLoUser u = user.get();
+        return jwtService.generateToken(
+                u.getId().toString(), // sub
+                u.getFirstName() + " " + u.getLastName(), // name
+                u.getRole() == StLoRole.ADMIN // admin
+        );
     }
 }
 
