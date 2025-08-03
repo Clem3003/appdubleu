@@ -25,10 +25,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        String token = userService.loginAndGetToken(request.getUsername(), request.getPassword());
+        String token = userService.login(request.getUsername(), request.getPassword());
         if (token == null) {
+            System.out.println("login fail");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
+        System.out.println("login ok");
         return ResponseEntity.ok(new JwtResponse(token));
     }
 

@@ -41,7 +41,7 @@ public class StLoUserService {
     }
 
     @Transactional
-    public StLoUser login(String username, String password) {
+    public String login(String username, String password) {
         Optional<StLoUser> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
             return null; // User not found
@@ -52,19 +52,6 @@ public class StLoUserService {
         if (!passwordEncoder.matches(password, user.get().getPassword())) {
             return null; // Password incorrect
         }
-        return user.get();
-    }
-
-    @Transactional
-    public String loginAndGetToken(String username, String password) {
-        Optional<StLoUser> user = userRepository.findByUsername(username);
-        if (user.isEmpty() || !user.get().isEnabled()) {
-            return null;
-        }
-        if (!passwordEncoder.matches(password, user.get().getPassword())) {
-            return null;
-        }
-
         StLoUser u = user.get();
         return jwtService.generateToken(
                 u.getId().toString(), // sub

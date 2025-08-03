@@ -1,12 +1,8 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {Subject} from 'rxjs';
-import {UserCredentials} from '../login.model';
-import {InputText} from 'primeng/inputtext';
-
-class ControlsOf<T> {
-}
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { InputText } from 'primeng/inputtext';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,42 +10,49 @@ class ControlsOf<T> {
     ReactiveFormsModule,
     InputText
   ],
-  templateUrl: './login-form.html'
+  templateUrl: './login-form.html',
+  standalone: true
 })
-export class LoginForm {
-  /* private readonly toast = injectToastService(); */
+export class LoginForm implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
+  protected form!: FormGroup;
+  private authService = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly onSignIn$ = new Subject<MouseEvent>();
-
-  // private login$ = this.onSignIn$.pipe(
-  //   tap(event => FormUtils.markAsTouched(this.form)),
-  //   filter(event => this.form.valid),
-  //   map(event => this.form.value as UserCredentials),
-  //   exhaustMap(credentials =>
-  //     this.auth.login(credentials).pipe(
-  //       tap(() => this.router.navigate(['/'])), // window.location.reload()
-  //       catchError(err => {
-  //         this.toast.warn({
-  //           detail: this.i18n.instant('error.http.401'),
-  //           title: this.i18n.instant('error.unauthorized')
-  //         });
-  //         return of(null);
-  //       })
-  //     )
-  //   )
-  // );
-
-  public form: FormGroup<ControlsOf<UserCredentials>> = this.fb.group<ControlsOf<UserCredentials>>({
-    username: this.fb.control('', Validators.required),
-    password: this.fb.control('', Validators.required)
-  });
 
   ngOnInit() {
-    // this.login$.subscribe();
+    this.initForm();
   }
 
-  signInAsForm(event: MouseEvent) {
-    // this.onSignIn$.next(event);
+  private initForm(): void {
+    this.form = this.fb.group({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+    });
+  }
+
+  onSubmit(): void {
+    if (!this.form || this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    // Récupération sécurisée des valeurs (non typée)
+    const username = this.form.get('username')?.value;
+    const password = this.form.get('password')?.value;
+
+    this.authService.login(username, password).subscribe({
+      next: (res) => {
+        this.authService.saveToken(res.token);
+        console.log('Success', res.token);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Échec de la connexion', err);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    // cleanup si nécessaire
   }
 }
