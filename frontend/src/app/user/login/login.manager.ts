@@ -1,13 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {AuthService} from './auth/auth.service';
-import {Router} from '@angular/router';
 import {tap} from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LoginManager {
 
   private authService: AuthService = inject(AuthService);
-  private readonly router = inject(Router);
 
   login(username: string, password: string) {
     return this.authService.login(username, password).pipe(

@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { InputText } from 'primeng/inputtext';
 import { AuthService } from '../auth/auth.service';
 import {LoginManager} from '../login.manager';
+import {Password} from 'primeng/password';
 
 @Component({
   selector: 'app-login-form',
   imports: [
     ReactiveFormsModule,
-    InputText
+    InputText,
+    Password
   ],
   templateUrl: './login-form.html',
   standalone: true

@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import {AuthGuard} from './user/login/auth/AuthGuard';
+import {FEATURES_ROUTES} from './features/features.routes';
+import {RedirectLoginGuard} from './RedirectLoginGuard';
+import {Login} from './user/login/login';
 
 export const routes: Routes = [
-  // {
-  //   path: 'dashboard',
-  //   component: DashboardComponent,
-  //   canActivate: [AuthGuard]
-  // }
+  { path: 'login', component: Login,  canActivate: [RedirectLoginGuard] },
+  { path: '', children: FEATURES_ROUTES }
 ];

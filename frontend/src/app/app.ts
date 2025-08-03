@@ -4,9 +4,10 @@ import {LoginForm} from './user/login/login-form/login-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LoginForm],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  imports: [RouterOutlet],
+  template: `
+  <router-outlet></router-outlet>
+  `
 })
 export class App {
   protected readonly title = signal('frontend');
