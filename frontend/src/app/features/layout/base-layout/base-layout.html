@@ -1,8 +1,9 @@
   <!-- Header --><!--style="background-color: rgba(40, 55, 146, 0.85);"-->
   <div class="relative flex items-center p-3 shadow-md" >
     <!-- Logo à gauche, débordant vers le bas -->
-    <img src="assets/logo-nobg.png" alt="Logo"
-         class="absolute left-3 top-full translate-y-[-50%] h-5rem w-5rem border-circle shadow-3 object-cover z-10" />
+    <img src="assets/logo-horizontal.png" alt="CB saint-laurent" class="w-8rem">
+<!--    <img src="assets/logo-nobg.png" alt="Logo"-->
+<!--         class="absolute left-3 top-full translate-y-[-50%] h-5rem w-5rem border-circle shadow-3 object-cover z-10" />-->
 
     <!-- Compte à droite -->
     <div class="flex items-center ml-auto">
@@ -19,21 +20,38 @@
 
   <div class="fixed flex align-items-center justify-content-around pt-2 bottom-0 h-5rem w-full bg-gray-50">
     <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'dashboard'">
-      <div><i [ngClass]="isActive('/dashboard')?'fa-solid':'fa-regular'" class="fa-home text-2xl"></i></div>
-      <div class="text-xs text-700">Accueil</div>
+      <i [ngClass]="{
+        'fas': !homeSelected(),
+        'far': homeSelected(),
+        'fa-home': true,
+        'text-2xl': true
+      }"></i>
+      <div class="text-xs text-700">
+        {{ homeSelected() ? 'Accueil' : 'Main' }}
+      </div>
     </div>
     <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'folklore'">
-      <div><i [ngClass]="isActive('/folklore')?'fa-solid':'fa-regular'" class="fa-newspaper text-2xl"></i></div>
+      <div><i [ngClass]="folkloreIconType()" class="fa-newspaper text-2xl"></i></div>
       <div class="text-xs text-700">Folklore</div>
     </div>
     <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'forum'">
-      <div><i [ngClass]="isActive('/forum')?'fa-solid':'fa-regular'" class="fa-envelope text-2xl"></i></div>
+      <div><i [ngClass]="forumIconType()" class="fa-envelope text-2xl"></i></div>
       <div class="text-xs text-700">Messages</div>
     </div>
     <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'profile'">
-      <div><i [ngClass]="isActive('/profile')?'fa-solid':'fa-regular'" class="fa-user text-2xl"></i>
+      <div><i [ngClass]="profileIconType()" class="fa-user text-2xl"></i>
       </div>
       <div class="text-xs text-700">Profil</div>
     </div>
   </div>
   <!-- Footer -->
+<!--  <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'dashboard'">-->
+<!--    <div>-->
+<!--      @if (homeSelected()) {-->
+<!--        <i class="far fa-home text-2xl"></i>-->
+<!--      } @else {-->
+<!--        <i class="fas fa-home text-2xl"></i>-->
+<!--      }-->
+<!--    </div>-->
+<!--    <div class="text-xs text-700">Accueil</div>-->
+<!--  </div>-->
