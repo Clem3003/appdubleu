@@ -4,6 +4,7 @@ import {RedirectLoginGuard} from '../RedirectLoginGuard';
 import {Dashboard} from './dashboard/dashboard';
 import {AuthGuard} from '../user/login/auth/AuthGuard';
 import {Features} from './features';
+import {Folklore} from './folklore/folklore';
 
 const defaultRoutes: Routes = [
   // { path: 'access-denied', component: ErrorComponent, data: { errorCode: 401 } },
@@ -13,7 +14,10 @@ const defaultRoutes: Routes = [
 ];
 
 const childrenRoutes: Routes = [
-    { path: '', component: Dashboard },
+    { path: 'dashboard', component: Dashboard },
+    { path: 'folklore', component: Folklore },
+    { path: 'forum', component: Dashboard },
+    { path: 'profile', component: Dashboard },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },
@@ -34,7 +38,7 @@ const childrenRoutes: Routes = [
 export const FEATURES_ROUTES: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [...childrenRoutes, ...defaultRoutes],
     component: Features,
   }

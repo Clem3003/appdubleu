@@ -1,0 +1,40 @@
+<!-- Header --><!--style="background-color: rgba(40, 55, 146, 0.85);"-->
+<div class="relative flex items-center p-3 shadow-md" >
+  <!-- Logo à gauche, débordant vers le bas -->
+  <img src="assets/logo-horizontal.png" alt="CB saint-laurent" class="w-8rem">
+  <!--    <img src="assets/logo-nobg.png" alt="Logo"-->
+  <!--         class="absolute left-3 top-full translate-y-[-50%] h-5rem w-5rem border-circle shadow-3 object-cover z-10" />-->
+
+  <!-- Compte à droite -->
+  <div class="flex items-center ml-auto">
+    <i class="pi pi-user text-2xl"></i>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<!-- Body -->
+<p>base-layout works!</p>
+<ng-content />
+
+<div class="fixed flex align-items-center justify-content-around pt-2 bottom-0 h-5rem w-full bg-gray-50">
+  <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'dashboard'">
+    <div><i [ngClass]="homeSelected()?'font-bold text-3xl':'text-2xl'" class="pi pi-home"></i></div>
+    <div class="text-xs text-700">Home</div>
+  </div>
+  <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'folklore'">
+    <div><i [ngClass]="folkloreSelected()?'font-bold text-3xl':'text-2xl'" class="pi pi-book text-2xl"></i></div>
+    <div class="text-xs text-700">Folklore</div>
+  </div>
+  <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'forum'">
+    <div><i [ngClass]="forumSelected()?'font-bold text-3xl':'text-2xl'" class="pi pi-envelope text-2xl"></i></div>
+    <div class="text-xs text-700">Messages</div>
+  </div>
+  <div class="flex flex-column align-items-center justify-content-center col-2" [routerLink]="'profile'">
+    <div><i [ngClass]="profileSelected()?'font-bold text-3xl':'text-2xl'" class="pi pi-user text-2xl"></i></div>
+    <div class="text-xs text-700">Compte</div>
+  </div>
+
+</div>
+<!-- Footer -->

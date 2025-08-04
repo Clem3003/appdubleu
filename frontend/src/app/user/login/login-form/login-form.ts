@@ -2,16 +2,13 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputText } from 'primeng/inputtext';
-import { AuthService } from '../auth/auth.service';
 import {LoginManager} from '../login.manager';
-import {Password} from 'primeng/password';
 
 @Component({
   selector: 'app-login-form',
   imports: [
     ReactiveFormsModule,
-    InputText,
-    Password
+    InputText
   ],
   templateUrl: './login-form.html',
   standalone: true
