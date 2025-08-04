@@ -1,1 +1,29 @@
-<p>folklore works!</p>
+<div class="flex flex-column">
+
+  <h2 class="mt-4 text-center">Folklore</h2>
+
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0">Recent</p-tab>
+      <p-tab value="1">Folklore</p-tab>
+      <p-tab value="2">Chants</p-tab>
+      <p-tab value="3">Pins</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <app-tab-general></app-tab-general>
+      </p-tabpanel>
+      <p-tabpanel value="1">
+        <app-tab-folklore></app-tab-folklore>
+      </p-tabpanel>
+      <p-tabpanel value="2">
+        <app-tab-chants></app-tab-chants>
+      </p-tabpanel>
+      <p-tabpanel value="3">
+        <app-tab-pins></app-tab-pins>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+
+</div>
+
