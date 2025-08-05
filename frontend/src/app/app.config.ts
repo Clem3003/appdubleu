@@ -6,6 +6,7 @@ import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {authInterceptor} from './user/login/auth/auth.interceptor';
+import {provideAnimations} from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: Aura
       }
-    })
+    }),
+    provideAnimations()
   ]
 };

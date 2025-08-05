@@ -5,8 +5,7 @@ import {Fluid} from 'primeng/fluid';
 @Component({
   selector: 'app-tab-folklore',
   imports: [
-    Card,
-    Fluid
+    Card
   ],
   templateUrl: './tab-folklore.html'
 })

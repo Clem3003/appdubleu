@@ -1,1 +1,55 @@
-<p>tab-chants works!</p>
+
+
+<p-panel header="Filtres" class="m-4 flex flex-column align-content-center justify-content-center">
+  <form [formGroup]="form">
+    <p-iconfield class="w-full" iconPosition="left">
+      <p-inputicon class="pi pi-search" />
+      <input type="text" pInputText placeholder="Search" formControlName="search" />
+<!--      TODO : Add a clear selection button -->
+    </p-iconfield>
+  </form>
+</p-panel>
+<p-panel header="Chants sacrés" class="m-4">
+  <p-accordion class="m-0" [multiple]="true">
+    @for (tab of filteredSacredSongs(); track tab.title) {
+      <p-accordion-panel [value]="tab.id">
+        <p-accordion-header>{{ tab.title }}</p-accordion-header>
+        <p-accordion-content>
+          <div [style.white-space]="'pre-line'">
+            {{ tab.content }}
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+</p-panel>
+<p-panel header="Chants comités" class="m-4">
+  <p-accordion class="m-0" [multiple]="true">
+    @for (tab of filteredCommitteeSongs(); track tab.title) {
+      <p-accordion-panel [value]="tab.id">
+        <p-accordion-header>{{ tab.title }}</p-accordion-header>
+        <p-accordion-content>
+          <div [style.white-space]="'pre-line'">
+            {{ tab.content }}
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+</p-panel>
+<p-panel header="Chants" class="m-4">
+  <p-accordion class="m-0" [multiple]="true">
+    @for (tab of filteredTraditionalSongs(); track tab.title) {
+      <p-accordion-panel [value]="tab.id">
+        <p-accordion-header>{{ tab.title }}</p-accordion-header>
+        <p-accordion-content>
+          <div [style.white-space]="'pre-line'">
+            {{ tab.content }}
+          </div>
+        </p-accordion-content>
+      </p-accordion-panel>
+    }
+  </p-accordion>
+</p-panel>
+
+<!-- TODO : Fix footer padding/margin -->
