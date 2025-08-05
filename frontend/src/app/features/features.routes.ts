@@ -5,6 +5,8 @@ import {Dashboard} from './dashboard/dashboard';
 import {AuthGuard} from '../user/login/auth/AuthGuard';
 import {Features} from './features';
 import {Folklore} from './folklore/folklore';
+import {Forum} from './forum/forum';
+import {Profile} from './profile/profile';
 
 const defaultRoutes: Routes = [
   // { path: 'access-denied', component: ErrorComponent, data: { errorCode: 401 } },
@@ -16,8 +18,8 @@ const defaultRoutes: Routes = [
 const childrenRoutes: Routes = [
     { path: 'dashboard', component: Dashboard },
     { path: 'folklore', component: Folklore },
-    { path: 'forum', component: Dashboard },
-    { path: 'profile', component: Dashboard },
+    { path: 'forum', component: Forum },
+    { path: 'profile', component: Profile },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },
