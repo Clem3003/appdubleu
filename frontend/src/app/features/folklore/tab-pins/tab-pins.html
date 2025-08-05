@@ -1,1 +1,17 @@
-<p>tab-pins works!</p>
+<p-fieldset legend="Header">
+<!--  TODO : Add a manual filter ? (table filter not working on mobile) -->
+  <p-table [value]="pins" class="m-0" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Definition</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData >
+      <tr>
+        <td>{{ rowData.name }}</td>
+        <td>{{ rowData.definition }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-fieldset>

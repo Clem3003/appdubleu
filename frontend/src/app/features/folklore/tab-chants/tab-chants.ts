@@ -28,7 +28,6 @@ export class TabChants implements OnInit {
   protected http = inject(HttpClient);
   protected fb = inject(FormBuilder);
 
-
   protected sacredSongs: BaptismalSong[] = [
     { id: '1', title: 'Saint-Laurent', songType: SongTypeEnum.SACRED_SONG, content: '' },
     { id: '2', title: 'La Brabançonne', songType: SongTypeEnum.SACRED_SONG, content: '' },
