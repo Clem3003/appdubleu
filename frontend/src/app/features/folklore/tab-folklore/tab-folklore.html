@@ -1,59 +1,11 @@
 <div class="flex flex-row flex-wrap">
 
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
-  <p-card class="col-6" header="Simple Card">
-    <p class="m-0">
-      Lorem ipsum dolor sit amet...
-    </p>
-  </p-card>
+  @for (subject of folkloreSubjects; track subject.id) {
+    <p-card class="m-2 w-full" [header]="subject.title">
+      <p class="m-0">
+        Lorem ipsum dolor sit amet...
+      </p>
+    </p-card>
+  }
 
 </div>
