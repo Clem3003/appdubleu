@@ -13,7 +13,7 @@ public class UserRoleHistory {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private StLoUser user;
+    private StLoUserEntity user;
 
     @Enumerated(EnumType.STRING)
     private StLoRole role;

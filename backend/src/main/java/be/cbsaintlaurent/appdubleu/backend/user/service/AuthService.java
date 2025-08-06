@@ -1,6 +1,6 @@
 package be.cbsaintlaurent.appdubleu.backend.user.service;
 
-import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUser;
+import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
 import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
 import jakarta.transaction.Transactional;
@@ -28,7 +28,7 @@ public class AuthService {
     
     @Transactional
     public String login(String username, String password) {
-        Optional<StLoUser> user = userRepository.findByUsername(username);
+        Optional<StLoUserEntity> user = userRepository.findByUsername(username);
         if (user.isEmpty()) {
             return null; // User not found
         }
@@ -39,7 +39,7 @@ public class AuthService {
             return null; // Password incorrect
         }
 
-        StLoUser u = user.get();
+        StLoUserEntity u = user.get();
         return jwtService.generateToken(
                 u.getId().toString(),
                 u.getFirstName() + " " + u.getLastName(),
@@ -48,8 +48,8 @@ public class AuthService {
     }
     
     @Transactional
-    public StLoUser register(String username, String firstName, String lastName, String email, String password, StLoRole role) {
-        StLoUser user = new StLoUser();
+    public StLoUserEntity register(String username, String firstName, String lastName, String email, String password, StLoRole role) {
+        StLoUserEntity user = new StLoUserEntity();
         user.setUsername(username);
         user.setFirstName(firstName);
         user.setLastName(lastName);

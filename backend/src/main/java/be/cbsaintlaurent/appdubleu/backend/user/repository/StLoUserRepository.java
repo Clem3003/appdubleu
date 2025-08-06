@@ -1,16 +1,16 @@
 package be.cbsaintlaurent.appdubleu.backend.user.repository;
 
-import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUser;
+import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface StLoUserRepository extends JpaRepository<StLoUser, Long> {
+public interface StLoUserRepository extends JpaRepository<StLoUserEntity, Long> {
 
     boolean existsByUsername(String username);
 
-    Optional<StLoUser> findByUsername(String username);
+    Optional<StLoUserEntity> findByUsername(String username);
 }
 
