@@ -31,6 +31,7 @@ export class LoginForm implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    console.log("onSubmit", this.form.value);
     if (!this.form || this.form.invalid) {
       this.form.markAllAsTouched();
       return;

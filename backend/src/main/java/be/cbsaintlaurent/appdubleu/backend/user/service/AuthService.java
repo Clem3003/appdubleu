@@ -52,6 +52,8 @@ public class AuthService {
 
     @Transactional
     public ResponseEntity<LoginRequest> register(RegisterRequest request) {
+        System.out.println("request");
+        System.out.println(request);
         StLoUserEntity user = new StLoUserEntity();
         String username = request.getFirstname().toLowerCase() + "."  + request.getLastname().toLowerCase();
         user.setFirstname(request.getFirstname());

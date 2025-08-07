@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {RegisterRequest} from '../../register/register.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -26,5 +27,9 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  register(request: RegisterRequest) {
+    return this.http.post(`${this.API_URL}/register`, request);
   }
 }
