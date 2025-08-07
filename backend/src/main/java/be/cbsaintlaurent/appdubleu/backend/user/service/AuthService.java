@@ -8,6 +8,7 @@ import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -51,11 +52,31 @@ public class AuthService {
     }
 
     @Transactional
-    public ResponseEntity<LoginRequest> register(RegisterRequest request) {
-        System.out.println("request");
-        System.out.println(request);
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    @Transactional
+    public ResponseEntity<?> register(RegisterRequest request) {
+        // Vérification que tous les champs nécessaires sont remplis
+        if (request.getFirstname() == null || request.getLastname() == null ||
+                request.getEmail() == null || request.getPassword() == null ||
+                request.getDateOfBirth() == null) {
+            return ResponseEntity.badRequest().body("Tous les champs requis doivent être remplis.");
+        }
+        String username = request.getFirstname().toLowerCase() + "." + request.getLastname().toLowerCase();
+
+        // Vérification de l’unicité de l’email
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Un utilisateur avec cet email existe déjà.");
+        }
+
+        // Vérification de l’unicité du username
+        if (userRepository.existsByUsername(username)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Un utilisateur avec ce nom d'utilisateur existe déjà.");
+        }
+
         StLoUserEntity user = new StLoUserEntity();
-        String username = request.getFirstname().toLowerCase() + "."  + request.getLastname().toLowerCase();
         user.setFirstname(request.getFirstname());
         user.setLastname(request.getLastname());
         user.setUsername(username);

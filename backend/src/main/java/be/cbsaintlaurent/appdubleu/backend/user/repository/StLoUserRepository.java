@@ -12,5 +12,7 @@ public interface StLoUserRepository extends JpaRepository<StLoUserEntity, Long> 
     boolean existsByUsername(String username);
 
     Optional<StLoUserEntity> findByUsername(String username);
+
+    boolean existsByEmail(String email);
 }
 
