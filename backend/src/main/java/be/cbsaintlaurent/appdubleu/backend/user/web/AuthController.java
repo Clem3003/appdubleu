@@ -43,5 +43,11 @@ public class AuthController {
     public static class JwtResponse {
         private String token;
     }
+
+    // TODO : to be removed, testing purposes
+    @PostMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
 }
 
