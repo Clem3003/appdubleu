@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,7 +17,7 @@ import java.time.Year;
 public class BaptismalSeasonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
     private Year startYear;
     private Year endYear;

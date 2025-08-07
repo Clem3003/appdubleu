@@ -1,6 +1,7 @@
 package be.cbsaintlaurent.appdubleu.backend.user.web;
 
 import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
+import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.service.AuthService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,17 +20,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthService userService;
+    private final AuthService service;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        String token = userService.login(request.getUsername(), request.getPassword());
+        String token = service.login(request.getUsername(), request.getPassword());
         if (token == null) {
             System.out.println("login fail");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
         System.out.println("login ok");
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<LoginRequest> register(@RequestBody RegisterRequest request) {
+        return service.register(request);
     }
 
     @Getter

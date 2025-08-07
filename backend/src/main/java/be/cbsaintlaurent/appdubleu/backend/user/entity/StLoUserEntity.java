@@ -23,18 +23,21 @@ public class StLoUserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String lastname;
+    private String firstname;
+
     private String username;
+    private LocalDate dateOfBirth;
+
     private String email;
     private String password;
 
-    private String firstName;
-    private String lastName;
 
     @Enumerated(EnumType.STRING)
     private StLoRole role;
 
     private boolean active;
-    private LocalDate dateInscription;
+    private LocalDate registerDate;
     private String profilePictureUrl;
     private String nickname;
 

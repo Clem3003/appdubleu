@@ -5,12 +5,13 @@ import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 public class PinsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
     private String title;
     private String pinsUrl;
