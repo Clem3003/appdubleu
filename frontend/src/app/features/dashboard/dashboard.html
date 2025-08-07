@@ -1,1 +1,25 @@
-<p>dashboard works!</p>
+<!-- Blue-side template -->
+
+
+<h2 class="mt-4 mb-2 mx-5 text-3xl">Bonjour, gros BLEU</h2>
+<p-card header="Statut" class="m-4">
+  <div class="flex flex-row justify-content-between">
+    <div class="flex flex-row">
+<!--      <div class="flex align-items-center justify-content-center-->
+<!--      border-round bg-primary text-white-->
+<!--      w-3rem h-3rem shadow-2">-->
+<!--        <i class="pi pi-user text-3xl"></i>-->
+<!--      </div>-->
+      <div>
+        <div>Bleu Wensel</div>
+        <div>21ans</div>
+        <div><i>Penne bleue</i></div>
+      </div>
+    </div>
+    <div class="flex flex-row align-items-end"> <!-- blocage de la valeur directement depuis le CSS pour ne pas avoir le style grisé "disabled" -->
+      <p-knob style="pointer-events: none;" [ngModel]="-15" [min]="-50" [max]="50" [ariaLabel]="'Score'" valueColor="#ff9d00" />
+      <i class="pi pi-info-circle text-1xl bottom-0" (click)="showScoreInfoDialog()"></i>
+    </div>
+  </div>
+
+</p-card>

@@ -1,0 +1,33 @@
+<!-- Static page, no dynamic data here -->
+<div class="p-2">
+  <p class="text-lg font-medium mb-3">
+    <strong>Bleu</strong> ! <br> Ce score représente ton <strong>niveau d'implication</strong> au sein du <strong>comité de baptême Saint-Laurent</strong>.
+  </p>
+  <p>Ex:</p>
+  <div class="flex flex-row justify-content-between mb-4">
+    <div class="flex flex-row">
+      <div>
+        <div>Bleu Einstein</div>
+        <div>147ans</div>
+        <div><i>Alberto</i>🤠</div>
+      </div>
+    </div>
+    <div class="flex flex-row align-items-end"> <!-- blocage de la valeur directement depuis le CSS pour ne pas avoir le style grisé "disabled" -->
+      <p-knob style="pointer-events: none;" [ngModel]="10" [min]="-50" [max]="50" [ariaLabel]="'Score'" valueColor="#7cc900" />
+      <i class="pi pi-info-circle text-1xl bottom-0"></i>
+    </div>
+  </div>
+
+  <p class="mb-4">
+    Sache que ton implication est un <strong>facteur clé</strong> pour ta réussite. Si tu devais perdre des points, voire être en négatif... pas de panique... Enfin <strong>SI</strong> !
+  </p>
+  <p class="mb-5 text-orange-700 font-semibold">
+    Tu te dois de <strong>remonter ton score</strong> aussi vite que possible sous peine de <strong>dégager</strong> !
+  </p>
+  <p class="mb-5 font-semibold">
+    Cordialement, La direction
+  </p>
+  <div class="flex justify-content-end">
+    <button pButton class="left-0" type="button" label="OK" (click)="ref.close()"></button>
+  </div>
+</div>
