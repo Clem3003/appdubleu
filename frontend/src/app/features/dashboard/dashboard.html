@@ -1,5 +1,11 @@
 <!-- Blue-side template -->
 
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 <h2 class="mt-4 mb-2 mx-5 text-3xl">Bonjour, gros BLEU</h2>
 <p-card header="Statut" class="m-4">
@@ -21,5 +27,26 @@
       <i class="pi pi-info-circle text-1xl bottom-0" (click)="showScoreInfoDialog()"></i>
     </div>
   </div>
-
 </p-card>
+
+<p-carousel class="m-4" [value]="products" [page]="1" [circular]="false" [responsiveOptions]="responsiveOptions">
+  <ng-template let-product #item>
+    <div class="border border-surface rounded-border m-2 p-4">
+      <div class="mb-4">
+        <div class="relative mx-auto">
+<!--          <img src="https://primefaces.org/cdn/primeng/images/demo/product/{{ product.image }}" [alt]="product.name" class="w-full rounded-border" />-->
+          <img [src]="product.pictureUrl" [alt]="product.name" class="w-full rounded-border" fill>
+          <p-tag [value]="product.inventoryStatus" [severity]="product.severity" class="absolute" [ngStyle]="{ 'left.px': 5, 'top.px': 5 }" />
+        </div>
+      </div>
+      <div class="mb-4 font-medium text-xl">{{ product.name }}</div>
+      <div class="flex justify-content-between">
+        <div class="mt-0 font-semibold text-xl"><i class="pi pi-calendar"></i> {{ product.date }}</div>
+        <span>
+            <p-button icon="pi pi-copy" severity="secondary" [outlined]="true" />
+            <p-button icon="pi pi-share-alt" styleClass="ml-2" />
+        </span>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>
