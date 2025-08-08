@@ -8,6 +8,8 @@ import {Carousel} from 'primeng/carousel';
 import {Tag} from 'primeng/tag';
 import {Button} from 'primeng/button';
 import {NgStyle} from '@angular/common';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AuthService} from '../../user/login/auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +27,8 @@ import {NgStyle} from '@angular/common';
 })
 export class Dashboard implements OnInit {
   private dialogService: DialogService = inject(DialogService)
+  private http: HttpClient = inject(HttpClient)
+  private authService: AuthService = inject(AuthService);
 
   protected ref: DynamicDialogRef | undefined;
 
@@ -97,6 +101,18 @@ export class Dashboard implements OnInit {
   responsiveOptions: any[] | undefined;
 
   ngOnInit() {
+
+    const token = this.authService.getToken();
+    console.log(token);
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    this.http.post("http://localhost:8080/api/auth/ping", {}).subscribe(res => {
+      console.log("ping");
+      console.log(res);
+    });
 
     this.responsiveOptions = [
       {

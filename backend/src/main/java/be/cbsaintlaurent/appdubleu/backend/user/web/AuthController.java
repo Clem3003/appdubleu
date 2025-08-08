@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +49,19 @@ public class AuthController {
     // TODO : to be removed, testing purposes
     @PostMapping("/ping")
     public String ping() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Current Authentication: " + auth);
+        System.out.println("isAuthenticated: " + auth.isAuthenticated());
         return "pong";
+    }
+
+    // TODO : to be removed, testing purposes
+    @PostMapping("/secured_ping")
+    public String securedPing() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Current Authentication: " + auth);
+        System.out.println("isAuthenticated: " + auth.isAuthenticated());
+        return "secured pong";
     }
 }
 

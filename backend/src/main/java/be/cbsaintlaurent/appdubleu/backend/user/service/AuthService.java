@@ -40,8 +40,8 @@ public class AuthService {
 
         StLoUserEntity u = user.get();
         return jwtService.generateToken(
+                u.getUsername(),
                 u.getId().toString(),
-                u.getFirstname() + " " + u.getLastname(),
                 u.getRole() == StLoRole.ADMIN
         );
     }
