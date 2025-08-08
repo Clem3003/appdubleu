@@ -49,6 +49,9 @@ public class AuthController {
     // TODO : to be removed, testing purposes
     @PostMapping("/ping")
     public String ping() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Current Authentication: " + auth);
+        System.out.println("isAuthenticated: " + auth.isAuthenticated());
         return "pong";
     }
 
