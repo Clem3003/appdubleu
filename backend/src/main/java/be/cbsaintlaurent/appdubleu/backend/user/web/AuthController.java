@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,6 +60,17 @@ public class AuthController {
         System.out.println("Current Authentication: " + auth);
         System.out.println("isAuthenticated: " + auth.isAuthenticated());
         return "secured pong";
+    }
+
+    // TODO : to be removed, testing purposes
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/secured_ping_admin")
+    public String securedPingAdmin() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Current Authentication: " + auth);
+        System.out.println("isAuthenticated: " + auth.isAuthenticated());
+        System.out.println("isAdmin");
+        return "secured admin pong";
     }
 }
 
