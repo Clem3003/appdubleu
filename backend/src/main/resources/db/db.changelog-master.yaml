@@ -5,3 +5,5 @@ databaseChangeLog:
       file: classpath:db/changelog/baptismal_season-schema.sql
   - include:
       file: classpath:db/changelog/folklore_subject-schema.sql
+  - include:
+      file: classpath:db/changelog/question-schema.sql

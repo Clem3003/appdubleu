@@ -21,6 +21,7 @@ public class BaptismalSongEntity {
 
     private String title;
     private String content;
+    private String author;
 
     @ManyToOne
     private StLoUserEntity createdBy;
