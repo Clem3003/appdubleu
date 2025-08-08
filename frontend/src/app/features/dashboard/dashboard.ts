@@ -102,18 +102,6 @@ export class Dashboard implements OnInit {
 
   ngOnInit() {
 
-    const token = this.authService.getToken();
-    console.log(token);
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    this.http.post("http://localhost:8080/api/auth/ping", {}).subscribe(res => {
-      console.log("ping");
-      console.log(res);
-    });
-
     this.responsiveOptions = [
       {
         breakpoint: '1400px',

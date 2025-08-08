@@ -32,6 +32,13 @@ public class QuestionEntity {
     @ManyToOne
     private PinsEntity pins;
 
+    private String suggestedAnswer_1;
+    private String suggestedAnswer_2;
+    private String suggestedAnswer_3;
+    private String suggestedAnswer_4;
+
+    private Integer correctAnswer;
+
     @ManyToOne
     private StLoUserEntity createdBy;
     private LocalDate createdAt;
