@@ -34,9 +34,13 @@ public class FolkloreSubjectService {
                 request.getContent(),
                 request.getPictureUrl(),
                 null,
+                null,
                 baptismalSeasonMapper.toDto(baptismalSeasonRepository.findFirstByActive(true)),
                 true
         );
+        System.out.println("folkloreSubject");
+        System.out.println(folkloreSubject);
+        System.out.println(mapper.toEntity(folkloreSubject));
 
         FolkloreSubjectEntity folkloreSubjectEntity = repository.save(mapper.toEntity(folkloreSubject));
         return ResponseEntity.ok(mapper.toDto(folkloreSubjectEntity));

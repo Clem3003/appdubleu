@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
-public class Question {
+public class NewQuestionRequest {
     private UUID id;
 
     private String prompt;
@@ -19,14 +19,6 @@ public class Question {
     private BaptismalSong baptismalSong;
     private FolkloreSubject folkloreSubject;
     private Pins pins;
-
-    private String suggestedAnswer_1;
-    private String suggestedAnswer_2;
-    private String suggestedAnswer_3;
-    private String suggestedAnswer_4;
-
-    private Integer correctAnswer;
-
 
     private StLoUser createdBy;
     private LocalDate createdAt;

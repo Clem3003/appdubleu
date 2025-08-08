@@ -1,6 +1,5 @@
 package be.cbsaintlaurent.appdubleu.backend.domain.folklore.folklore_subject.dto;
 
-import be.cbsaintlaurent.appdubleu.backend.domain.season.dto.BaptismalSeason;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
