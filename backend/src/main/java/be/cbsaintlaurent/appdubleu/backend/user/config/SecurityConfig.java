@@ -75,8 +75,6 @@ public class SecurityConfig {
                 .httpBasic(basic -> basic.disable())
         ;
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Sec config - Current Authentication: " + auth);
         return http.build();
     }
 

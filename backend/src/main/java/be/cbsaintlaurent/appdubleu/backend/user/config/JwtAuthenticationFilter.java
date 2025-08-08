@@ -31,36 +31,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
-        System.out.println("Auth header received: " + authHeader);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println("No Bearer token found in header");
             filterChain.doFilter(request, response);
             return;
         }
 
         final String jwt = authHeader.substring(7);
-        System.out.println("JWT token extracted: " + jwt);
-
         final String username = jwtService.extractUsername(jwt);
-        System.out.println("Username extracted from JWT: " + username);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = userRepository.findByUsername(username).orElse(null);
-            System.out.println("UserDetails found: " + userDetails);
 
             if (userDetails != null && jwtService.isTokenValid(jwt, userDetails)) {
-                System.out.println("Token is valid");
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-                System.out.println("Authentication set in SecurityContext");
-            } else {
-                System.out.println("Token invalid or userDetails null");
             }
-        } else {
-            System.out.println("Username null or Authentication already set");
         }
 
         filterChain.doFilter(request, response);
