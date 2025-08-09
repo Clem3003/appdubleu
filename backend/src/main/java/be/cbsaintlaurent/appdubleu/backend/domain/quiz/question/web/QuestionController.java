@@ -5,10 +5,7 @@ import be.cbsaintlaurent.appdubleu.backend.domain.quiz.question.service.Question
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/question")
@@ -21,6 +18,12 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity<?> newQuestion(@RequestBody NewQuestionRequest request) {
         var response = service.newQuestion(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getActiveQuestions")
+    public ResponseEntity<?> getActiveQuestion() {
+        var response = service.getActiveQuestions();
         return ResponseEntity.ok(response);
     }
 }

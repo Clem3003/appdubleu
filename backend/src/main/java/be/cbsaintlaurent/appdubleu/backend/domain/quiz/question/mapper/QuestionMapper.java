@@ -9,6 +9,8 @@ import be.cbsaintlaurent.appdubleu.backend.user.mapper.StLoUserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {StLoUserMapper.class, PinsMapper.class, BaptismalSongMapper.class, FolkloreSubjectMapper.class})
 public interface QuestionMapper {
 
@@ -16,5 +18,7 @@ public interface QuestionMapper {
 
     @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "toReducedDto")
     Question toDto(QuestionEntity entity);
+
+    List<Question> toDto(List<QuestionEntity> entity);
 
 }

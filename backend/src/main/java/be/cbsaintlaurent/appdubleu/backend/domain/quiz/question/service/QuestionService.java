@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -61,4 +62,7 @@ public class QuestionService {
         return mapper.toDto(response);
     }
 
+    public List<Question> getActiveQuestions() {
+        return this.mapper.toDto(this.repository.findAll());
+    }
 }
