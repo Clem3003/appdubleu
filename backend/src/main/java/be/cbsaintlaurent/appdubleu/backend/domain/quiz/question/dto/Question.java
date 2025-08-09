@@ -27,7 +27,6 @@ public class Question {
 
     private Integer correctAnswer;
 
-
     private StLoUser createdBy;
     private LocalDateTime createdAt;
 }

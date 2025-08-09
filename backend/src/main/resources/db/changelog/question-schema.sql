@@ -1,14 +1,14 @@
 --liquibase formatted sql
 
---changeset question-schema:10
+--changeset question-schema:11
 CREATE TABLE question_entity (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
   prompt VARCHAR(1024),
 
-  baptismal_song_entity_id UUID,
-  folklore_subject_entity_id UUID,
-  pins_entity_id UUID,
+  baptismal_song_id UUID,
+  folklore_subject_id UUID,
+  pins_id UUID,
 
   suggested_answer_1 VARCHAR(255),
   suggested_answer_2 VARCHAR(255),
@@ -24,12 +24,12 @@ CREATE TABLE question_entity (
       FOREIGN KEY (created_by_id)
           REFERENCES st_lo_user_entity(id),
   CONSTRAINT fk_question_baptismal_song
-      FOREIGN KEY (baptismal_song_entity_id)
+      FOREIGN KEY (baptismal_song_id)
           REFERENCES baptismal_song_entity(id),
   CONSTRAINT fk_question_folklore_subject
-      FOREIGN KEY (folklore_subject_entity_id)
+      FOREIGN KEY (folklore_subject_id)
           REFERENCES folklore_subject_entity(id),
   CONSTRAINT fk_question_pins
-      FOREIGN KEY (pins_entity_id)
+      FOREIGN KEY (pins_id)
           REFERENCES pins_entity(id)
 );
