@@ -4,12 +4,15 @@ import be.cbsaintlaurent.appdubleu.backend.domain.season.dto.BaptismalSeason;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class FolkloreSubject {
     private UUID id;
 
@@ -18,7 +21,7 @@ public class FolkloreSubject {
     private String pictureUrl;
 
     private StLoUser createdBy;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     private BaptismalSeason baptismalSeason;
 

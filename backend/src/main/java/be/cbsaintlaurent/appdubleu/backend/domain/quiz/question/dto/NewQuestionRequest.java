@@ -7,6 +7,7 @@ import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -21,5 +22,5 @@ public class NewQuestionRequest {
     private Pins pins;
 
     private StLoUser createdBy;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 }

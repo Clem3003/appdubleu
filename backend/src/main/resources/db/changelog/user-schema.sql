@@ -1,8 +1,8 @@
  --liquibase formatted sql
 
- --changeset user-schema:1
+ --changeset user-schema:2
  CREATE TABLE st_lo_user_entity (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     lastname VARCHAR(255),
     firstname VARCHAR(255),
     username VARCHAR(255) UNIQUE NOT NULL,

@@ -5,7 +5,7 @@ import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -25,7 +25,7 @@ public class FolkloreSubjectEntity {
 
     @ManyToOne
     private StLoUserEntity createdBy;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     private BaptismalSeasonEntity baptismalSeasonEntity;

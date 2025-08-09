@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset question-schema:9
+--changeset question-schema:10
 CREATE TABLE question_entity (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
@@ -17,10 +17,10 @@ CREATE TABLE question_entity (
 
   correct_answer INTEGER,
 
-  created_by_id INTEGER,
-  created_at DATE,
+  created_by_id UUID,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   active BOOLEAN NOT NULL DEFAULT FALSE,
-  CONSTRAINT fk_folklore_created_by
+  CONSTRAINT fk_folklore_created_by_id
       FOREIGN KEY (created_by_id)
           REFERENCES st_lo_user_entity(id),
   CONSTRAINT fk_question_baptismal_song

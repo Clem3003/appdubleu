@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +42,7 @@ public class QuestionService {
         question.setSuggestedAnswer_4(request.getPrompt());
         question.setCorrectAnswer(2);
 //        question.setFolkloreSubject();
-        question.setCreatedAt(LocalDate.now());
+        question.setCreatedAt(LocalDateTime.now());
 
         QuestionEntity response = repository.save(mapper.toEntity(question));
         return ResponseEntity.ok(mapper.toDto(response));

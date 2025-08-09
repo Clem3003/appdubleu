@@ -1,10 +1,11 @@
 package be.cbsaintlaurent.appdubleu.backend.domain.season.dto;
 
+import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.UUID;
 
@@ -21,8 +22,8 @@ public class BaptismalSeason {
 
     private String pictureUrl; // Photo du comité avec penne et tête qui regarde par terre
 
-//    private StLoUser creator;
-    private LocalDate creationDate;
+    private StLoUser createdBy;
+    private LocalDateTime createdAt;
 
     private boolean active;
 

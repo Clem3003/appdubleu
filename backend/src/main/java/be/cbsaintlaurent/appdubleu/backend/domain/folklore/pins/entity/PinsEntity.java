@@ -4,7 +4,7 @@ import be.cbsaintlaurent.appdubleu.backend.domain.season.entity.BaptismalSeasonE
 import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +19,7 @@ public class PinsEntity {
 
     @ManyToOne
     private StLoUserEntity createdBy;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     private BaptismalSeasonEntity baptismalSeasonEntity;

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.UUID;
 
@@ -27,8 +28,8 @@ public class BaptismalSeasonEntity {
     private String pictureUrl; // Photo du comité avec penne et tête qui regarde par terre
 
     @ManyToOne
-    private StLoUserEntity creator;
-    private LocalDate creationDate;
+    private StLoUserEntity createdBy;
+    private LocalDateTime createdAt;
 
     private boolean active;
 }

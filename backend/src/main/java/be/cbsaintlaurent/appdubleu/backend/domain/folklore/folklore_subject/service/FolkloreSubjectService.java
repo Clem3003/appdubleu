@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -29,15 +31,16 @@ public class FolkloreSubjectService {
 
 
     public ResponseEntity<?> register(NewFolkloreSubjectRequest request) {
-        FolkloreSubject folkloreSubject = new FolkloreSubject(null,
-                request.getTitle(),
-                request.getContent(),
-                request.getPictureUrl(),
-                null,
-                null,
-                baptismalSeasonMapper.toDto(baptismalSeasonRepository.findFirstByActive(true)),
-                true
-        );
+        FolkloreSubject folkloreSubject = new FolkloreSubject();
+        folkloreSubject.setTitle(request.getTitle());
+        folkloreSubject.setContent(request.getContent());
+        folkloreSubject.setPictureUrl(request.getPictureUrl());
+        folkloreSubject.setCreatedBy(null);
+        folkloreSubject.setCreatedAt(LocalDateTime.now());
+        folkloreSubject.setBaptismalSeason(
+                baptismalSeasonMapper.toDto(baptismalSeasonRepository.findFirstByActive(true)));
+                folkloreSubject.setActive(true);
+
         System.out.println("folkloreSubject");
         System.out.println(folkloreSubject);
         System.out.println(mapper.toEntity(folkloreSubject));

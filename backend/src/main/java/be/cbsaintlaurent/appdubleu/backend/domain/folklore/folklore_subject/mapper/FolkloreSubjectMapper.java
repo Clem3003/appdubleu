@@ -12,9 +12,9 @@ import org.mapstruct.Mapping;
 public interface FolkloreSubjectMapper {
 
     @Mapping(source = "baptismalSeason", target = "baptismalSeasonEntity")
-    @Mapping(source = "createdBy", target = "createdBy")
     FolkloreSubjectEntity toEntity(FolkloreSubject dto);
 
+    @Mapping(source = "baptismalSeasonEntity", target = "baptismalSeason")
     FolkloreSubject toDto(FolkloreSubjectEntity entity);
 
 }

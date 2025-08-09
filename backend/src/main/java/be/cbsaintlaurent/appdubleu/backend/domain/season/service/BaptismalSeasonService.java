@@ -5,15 +5,20 @@ import be.cbsaintlaurent.appdubleu.backend.domain.season.dto.NewBaptismalSeasonR
 import be.cbsaintlaurent.appdubleu.backend.domain.season.entity.BaptismalSeasonEntity;
 import be.cbsaintlaurent.appdubleu.backend.domain.season.mapper.BaptismalSeasonMapper;
 import be.cbsaintlaurent.appdubleu.backend.domain.season.repository.BaptismalSeasonRepository;
+import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUserSummary;
+import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
+import be.cbsaintlaurent.appdubleu.backend.user.mapper.StLoUserMapper;
+import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -22,23 +27,33 @@ public class BaptismalSeasonService {
 
     @Getter(AccessLevel.PROTECTED)
     private final BaptismalSeasonRepository repository;
+    private final StLoUserRepository userRepository;
     @Getter(AccessLevel.PROTECTED)
     private final BaptismalSeasonMapper mapper;
+    private final StLoUserMapper userMapper;
 
     @Transactional
-    public ResponseEntity<?> newSeason(NewBaptismalSeasonRequest request) {
+    public BaptismalSeason newSeason(NewBaptismalSeasonRequest request) {
+        // Récupère l'utilisateur connecté (entité gérée par Hibernate)
+        StLoUserEntity userEntity = userRepository
+                .findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
 
-        BaptismalSeason season = new BaptismalSeason();
-        season.setTitle(request.getTitle());
-        season.setPictureUrl(request.getPictureUrl());
-        season.setStartYear(request.getStartYear());
-        season.setEndYear(request.getEndYear());
-        season.setCreationDate(LocalDate.now());
+        // Crée directement l'entité Season
+        BaptismalSeasonEntity seasonEntity = new BaptismalSeasonEntity();
+        seasonEntity.setTitle(request.getTitle());
+        seasonEntity.setPictureUrl(request.getPictureUrl());
+        seasonEntity.setStartYear(request.getStartYear());
+        seasonEntity.setEndYear(request.getEndYear());
+        seasonEntity.setCreatedBy(userEntity);
+        seasonEntity.setCreatedAt(LocalDateTime.now());
 
-        BaptismalSeasonEntity response = repository.save(mapper.toEntity(season));
-        return ResponseEntity.ok(mapper.toDto(response));
+        // Sauvegarde et renvoie un DTO
+        BaptismalSeasonEntity savedSeason = repository.save(seasonEntity);
+        return mapper.toDto(savedSeason);
     }
 
+    @Transactional
     public ResponseEntity<?> getCurrentBaptismalSeason() {
         return ResponseEntity.ok(repository.findFirstByActive(true));
     }

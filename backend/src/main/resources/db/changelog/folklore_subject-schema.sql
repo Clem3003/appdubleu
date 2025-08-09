@@ -1,18 +1,16 @@
 --liquibase formatted sql
 
---changeset folklore_subject-schema:8
+--changeset folklore_subject-schema:10
 CREATE TABLE folklore_subject_entity (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   title VARCHAR(255) NOT NULL,
   content TEXT,
   picture_url VARCHAR(1024),
-  created_by_id INTEGER,
-  created_at DATE,
+  created_by_id UUID,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   baptismal_season_entity_id UUID,
   active BOOLEAN NOT NULL DEFAULT FALSE,
-  CONSTRAINT fk_folklore_created_by
-      FOREIGN KEY (created_by_id)
-          REFERENCES st_lo_user_entity(id),
+  CONSTRAINT fk_folklore_created_by_id FOREIGN KEY (created_by_id) REFERENCES st_lo_user_entity(id),
   CONSTRAINT fk_folklore_baptismal_season_entity
       FOREIGN KEY (baptismal_season_entity_id)
           REFERENCES baptismal_season_entity(id)
@@ -23,13 +21,11 @@ CREATE TABLE baptismal_song_entity (
   title VARCHAR(255) NOT NULL,
   content TEXT,
   author VARCHAR(1024),
-  created_by_id INTEGER,
-  created_at DATE,
+  created_by_id UUID,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   baptismal_season_entity_id UUID,
   active BOOLEAN NOT NULL DEFAULT FALSE,
-  CONSTRAINT fk_baptismal_song_created_by
-      FOREIGN KEY (created_by_id)
-          REFERENCES st_lo_user_entity(id),
+  CONSTRAINT fk_baptismal_song_created_by_id FOREIGN KEY (created_by_id) REFERENCES st_lo_user_entity(id),
   CONSTRAINT fk_baptismal_song_baptismal_season_entity
       FOREIGN KEY (baptismal_season_entity_id)
           REFERENCES baptismal_season_entity(id)
@@ -40,13 +36,11 @@ CREATE TABLE pins_entity (
   title VARCHAR(255) NOT NULL,
   pinsUrl VARCHAR(1024),
   comment VARCHAR(1024),
-  created_by_id INTEGER,
-  created_at DATE,
+  created_by_id UUID,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   baptismal_season_entity_id UUID,
   active BOOLEAN NOT NULL DEFAULT FALSE,
-  CONSTRAINT fk_pins_created_by
-      FOREIGN KEY (created_by_id)
-          REFERENCES st_lo_user_entity(id),
+  CONSTRAINT fk_pins_created_by_id FOREIGN KEY (created_by_id) REFERENCES st_lo_user_entity(id),
   CONSTRAINT fk_pins_baptismal_season_entity
       FOREIGN KEY (baptismal_season_entity_id)
           REFERENCES baptismal_season_entity(id)
