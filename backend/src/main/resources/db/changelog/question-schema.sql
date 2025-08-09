@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset question-schema:11
+--changeset question-schema:14
 CREATE TABLE question_entity (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
@@ -32,4 +32,29 @@ CREATE TABLE question_entity (
   CONSTRAINT fk_question_pins
       FOREIGN KEY (pins_id)
           REFERENCES pins_entity(id)
+);
+
+CREATE TABLE question_attempt_entity (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+  user_entity_id UUID,
+  question_entity_id UUID,
+  attempt_answer VARCHAR(255),
+  correct_answer INTEGER,
+  answer_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  success BOOLEAN NOT NULL,
+
+  created_by_id UUID,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  active BOOLEAN NOT NULL DEFAULT FALSE,
+  CONSTRAINT fk_folklore_created_by_id
+      FOREIGN KEY (created_by_id)
+          REFERENCES st_lo_user_entity(id),
+  CONSTRAINT fk_user_entity_id
+      FOREIGN KEY (user_entity_id)
+          REFERENCES st_lo_user_entity(id),
+  CONSTRAINT fk_question_entity_id
+      FOREIGN KEY (question_entity_id)
+          REFERENCES question_entity(id)
 );
