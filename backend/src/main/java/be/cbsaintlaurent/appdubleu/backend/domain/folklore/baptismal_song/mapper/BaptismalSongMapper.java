@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 public interface BaptismalSongMapper {
     BaptismalSongEntity toEntity(BaptismalSong dto);
 
+//    @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "toReducedDto")
     BaptismalSong toDto(BaptismalSongEntity entity);
 
 }

@@ -7,12 +7,14 @@ import be.cbsaintlaurent.appdubleu.backend.domain.quiz.question.dto.Question;
 import be.cbsaintlaurent.appdubleu.backend.domain.quiz.question.entity.QuestionEntity;
 import be.cbsaintlaurent.appdubleu.backend.user.mapper.StLoUserMapper;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring", uses = {StLoUserMapper.class, PinsMapper.class, BaptismalSongMapper.class, FolkloreSubjectMapper.class})
 public interface QuestionMapper {
 
     QuestionEntity toEntity(Question dto);
 
+    @Mapping(source = "createdBy", target = "createdBy", qualifiedByName = "toReducedDto")
     Question toDto(QuestionEntity entity);
 
 }

@@ -59,6 +59,21 @@ public class QuestionAttemptService {
 
 
     private boolean isAnswerCorrect(QuestionEntity questionEntity, String answer){
-        return true;
+        switch (questionEntity.getCorrectAnswer()){
+            case 1:
+                if (answer.equals(questionEntity.getSuggestedAnswer_1()))
+                    return true;
+            case 2:
+                if (answer.equals(questionEntity.getSuggestedAnswer_2()))
+                    return true;
+            case 3:
+                if (answer.equals(questionEntity.getSuggestedAnswer_3()))
+                    return true;
+            case 4:
+                if (answer.equals(questionEntity.getSuggestedAnswer_4()))
+                    return true;
+            default:
+                return false;
+        }
     }
 }
