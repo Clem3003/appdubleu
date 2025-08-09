@@ -54,7 +54,7 @@ public class BaptismalSeasonService {
     }
 
     @Transactional
-    public ResponseEntity<?> getCurrentBaptismalSeason() {
-        return ResponseEntity.ok(repository.findFirstByActive(true));
+    public BaptismalSeason getCurrentBaptismalSeason() {
+        return mapper.toDto(repository.findFirstByActive(true));
     }
 }

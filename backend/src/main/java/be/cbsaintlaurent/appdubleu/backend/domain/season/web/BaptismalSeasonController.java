@@ -24,6 +24,7 @@ public class BaptismalSeasonController {
 
     @GetMapping("/current")
     public ResponseEntity<?> getCurrent() {
-        return service.getCurrentBaptismalSeason();
+        var response = service.getCurrentBaptismalSeason();
+        return ResponseEntity.ok(response);
     }
 }
