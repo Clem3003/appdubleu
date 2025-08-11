@@ -7,8 +7,11 @@
 
   <!-- Compte à droite -->
   <div class="flex items-center ml-auto">
-    <i class="pi pi-user text-2xl"></i>
+    <i class="pi pi-user text-2xl" (click)="menu.toggle($event)"></i>
   </div>
+  <p-menu #menu [model]="accountMenuItems" [popup]="true"
+          appendTo="body"
+          styleClass="menu-left"/>
 </div>
 
 <!-- Body -->

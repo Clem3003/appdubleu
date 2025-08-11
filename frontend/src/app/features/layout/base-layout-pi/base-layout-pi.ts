@@ -3,18 +3,45 @@ import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {filter} from 'rxjs';
 import {dom} from '@fortawesome/fontawesome-svg-core';
 import {NgClass} from '@angular/common';
+import {Menu} from 'primeng/menu';
+import {MenuItem} from 'primeng/api';
 
 @Component({
   selector: 'app-base-layout-pi',
   imports: [
     NgClass,
-    RouterLink
+    RouterLink,
+    Menu
   ],
   templateUrl: './base-layout-pi.html'
 })
 export class BaseLayoutPi implements  OnInit {
   private readonly router = inject(Router);
   private readonly cd = inject(ChangeDetectorRef);
+  protected readonly accountMenuItems: MenuItem[] = [
+    {
+      label: 'Profile',
+      items: [
+        {
+          label: 'Settings',
+          icon: 'pi pi-cog'
+        },
+        {
+          label: 'Logout',
+          icon: 'pi pi-sign-out'
+        }
+      ]
+    },
+    {
+      label: 'Informations',
+      items: [
+        {
+          label: 'Infos',
+          icon: 'pi pi-info-circle'
+        }
+      ]
+    }
+  ];
 
   // faHouseSolid = faHouseSolid;
   // faHouseRegular = faHouseRegular;
