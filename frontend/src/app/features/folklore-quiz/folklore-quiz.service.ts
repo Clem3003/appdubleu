@@ -5,7 +5,7 @@ import {Question} from '../../models/question.model';
 
 @Injectable({ providedIn: 'root' })
 export class FolkloreQuizService {
-  private readonly API_URL = 'http://localhost:8080/api/question';
+  private readonly API_URL = 'https://cbsaintlaurent.be/api/question';
 
   private http: HttpClient = inject(HttpClient);
 

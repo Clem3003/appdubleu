@@ -1,4 +1,5 @@
-FROM openjdk:17-alpine
+FROM openjdk:17
 EXPOSE 8080
-ADD backend/target/backend-0.0.1.jar appdubleu-backend.jar
+ADD target/backend-0.0.1.jar appdubleu-backend.jar
+ADD .env .env
 ENTRYPOINT ["java", "-jar", "appdubleu-backend.jar"]

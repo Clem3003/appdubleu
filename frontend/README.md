@@ -14,11 +14,11 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ```
 ## Build image
 ```dockerfile
-docker build . -t appdubleu-frontend
+    docker build --no-cache . -t appdubleu-frontend
 ```
 ## Run container
 ```dockerfile
-docker run -p 4200:80 --name appdubleu-frontend -d appdubleu-frontend
+    docker run -p 4200:80 --name appdubleu-frontend -d appdubleu-frontend
 ```
 ## Check running containers
 ```dockerfile
@@ -28,6 +28,75 @@ docker ps
 ```http request
 http://localhost:4200/
 ```
+
+
+## Install no tests
+```bash
+    mvn clean install -DskipTests
+```
+```bash
+    RUN BACKEND DOCKERFILE (with docker desktop open)
+```
+```bash
+    docker image ls
+```
+```bash
+    docker save -o C:\Users\cleme\Downloads\appdubleu-backend.tar CONTAINER_ID
+```
+### Debian
+```bash
+   docker load -i /home/debian/appdubleu-backend.tar
+```
+```bash
+   docker image ls
+```
+```bash
+   docker run -i -t -d --env=SPRING_DATASOURCE_URL=jdbc:postgresql://appdubleu-postgres:5432/cbstlo --env=SPRING_DATASOURCE_USERNAME=postgres --env=SPRING_DATASOURCE_PASSWORD=secret --network=stlo_network CONTAINER_ID
+```
+
+## Angular
+
+```bash
+  npm run build --prod
+```
+```bash
+  docker build --no-cache . -t appdubleu-frontend
+```
+```bash
+  docker image ls
+```
+```bash
+  docker save -o C:\Users\cleme\Downloads\appdubleu-frontend.tar CONTAINER_ID
+```
+### Debian
+
+```bash
+  docker load -i /home/debian/appdubleu-frontend.tar
+```
+```bash
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Other
 
