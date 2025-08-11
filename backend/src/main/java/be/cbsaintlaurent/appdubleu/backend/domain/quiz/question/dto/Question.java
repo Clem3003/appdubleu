@@ -26,6 +26,7 @@ public class Question {
     private String suggestedAnswer_4;
 
     private Integer correctAnswer;
+    private Boolean active;
 
     private StLoUser createdBy;
     private LocalDateTime createdAt;

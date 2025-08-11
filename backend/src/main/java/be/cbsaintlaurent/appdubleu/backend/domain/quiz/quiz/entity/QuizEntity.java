@@ -1,13 +1,15 @@
-package be.cbsaintlaurent.appdubleu.backend.domain.quiz.question.entity;
+package be.cbsaintlaurent.appdubleu.backend.domain.quiz.quiz.entity;
 
 import be.cbsaintlaurent.appdubleu.backend.domain.folklore.baptismal_song.entity.BaptismalSongEntity;
 import be.cbsaintlaurent.appdubleu.backend.domain.folklore.folklore_subject.entity.FolkloreSubjectEntity;
 import be.cbsaintlaurent.appdubleu.backend.domain.folklore.pins.entity.PinsEntity;
+import be.cbsaintlaurent.appdubleu.backend.domain.quiz.question.entity.QuestionEntity;
 import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,30 +18,14 @@ import java.util.UUID;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionEntity {
+public class QuizEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String prompt;
-
-    // Folklore reference
-    @ManyToOne
-    private BaptismalSongEntity baptismalSong;
-    @ManyToOne
-    private FolkloreSubjectEntity folkloreSubject;
-    @ManyToOne
-    private PinsEntity pins;
-
-    private String suggestedAnswer_1;
-    private String suggestedAnswer_2;
-    private String suggestedAnswer_3;
-    private String suggestedAnswer_4;
-
-    private Integer correctAnswer;
-
-    private Boolean active;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<QuestionEntity> questions;
 
     @ManyToOne
     private StLoUserEntity createdBy;

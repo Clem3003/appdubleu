@@ -1,4 +1,4 @@
-package be.cbsaintlaurent.appdubleu.backend.domain.quiz.question.dto;
+package be.cbsaintlaurent.appdubleu.backend.domain.quiz.quiz.dto;
 
 import be.cbsaintlaurent.appdubleu.backend.domain.folklore.baptismal_song.dto.BaptismalSong;
 import be.cbsaintlaurent.appdubleu.backend.domain.folklore.folklore_subject.dto.FolkloreSubject;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-public class NewQuestionRequest {
+public class NewQuizRequest {
     private UUID id;
 
     private String prompt;
@@ -26,7 +26,6 @@ public class NewQuestionRequest {
     private String suggestedAnswer_4;
 
     private Integer correctAnswer;
-    private Boolean active;
 
     private StLoUser createdBy;
     private LocalDateTime createdAt;

@@ -65,4 +65,7 @@ public class QuestionService {
     public List<Question> getActiveQuestions() {
         return this.mapper.toDto(this.repository.findAll());
     }
+    public List<Question> getFourRandomActiveQuestions() {
+        return this.mapper.toDto(this.repository.findTop4ByActiveTrueOrderByRandom());
+    }
 }

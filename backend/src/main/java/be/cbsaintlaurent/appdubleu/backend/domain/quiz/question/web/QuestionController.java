@@ -26,4 +26,10 @@ public class QuestionController {
         var response = service.getActiveQuestions();
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/getFourRandomActiveQuestions")
+    public ResponseEntity<?> getFourRandomActiveQuestion() {
+        var response = service.getFourRandomActiveQuestions();
+        System.out.println(response);
+        return ResponseEntity.ok(response);
+    }
 }
