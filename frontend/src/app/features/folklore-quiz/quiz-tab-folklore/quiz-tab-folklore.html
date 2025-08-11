@@ -1,34 +1,50 @@
 @if (folkloreQuizManager.activeQuestions() != undefined)
 {
   <p-toast life="2000" class="w-8" />
-  @for (item of folkloreQuizManager.activeQuestions(); let i = $index; track item.id) {
-    <!-- contenu à répéter, par exemple : -->
-    <div class="flex flex-column gap-4 py-3">
-      <!-- Prompt / Question -->
-      <div class="flex flex-row gap-3">
-        <p-image [src]="item.folkloreSubject.pictureUrl" alt="item.pictureUrl" width="100" [preview]="true" />
-        <h2 class="text-2xl pt-3">{{ item.prompt }}</h2>
-      </div>
 
-      <!-- Options -->
-      <form class="flex flex-column gap-2">
-        <p-button [label]="item.suggestedAnswer_1" (onClick)="selectAnswer(1, item)" [raised]="true" [severity]="button1Severity()" />
-        <p-button [label]="item.suggestedAnswer_2" (onClick)="selectAnswer(2, item)" [raised]="true" [severity]="button2Severity()" />
-        <p-button [label]="item.suggestedAnswer_3" (onClick)="selectAnswer(3, item)" [raised]="true" [severity]="button3Severity()" />
-        <p-button [label]="item.suggestedAnswer_4" (onClick)="selectAnswer(4, item)" [raised]="true" [severity]="button4Severity()" />
-      </form>
+  <p-stepper [value]="1" class="basis-[50rem]">
+    <p-step-list>
+      <p-step [value]="1">Q. 1</p-step>
+      <p-step [value]="2">Q. 2</p-step>
+      <p-step [value]="3">Q. 3</p-step>
+      <p-step [value]="4">Q. 4</p-step>
+    </p-step-list>
+    <p-step-panels>
+      <p-step-panel [value]="1">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="flex flex-col h-48">
+            <div class="flex flex-column gap-4 py-3">
+              <!-- Prompt / Question -->
+              <h2 class="text-2xl">Question 1 :</h2>
+              <div class="flex flex-row gap-3">
+                <p-image [src]="folkloreQuizManager.activeQuestions()[0].folkloreSubject.pictureUrl" alt="question.pictureUrl" width="100" [preview]="true" />
+                <h3 class="text-2xl pt-3">{{ folkloreQuizManager.activeQuestions()[0].prompt }}</h3>
+              </div>
 
-      <!-- Validation -->
-      <div class="flex justify-content-end">
-        <p-button [label]="'Valider'" (click)="onSubmit()" [disabled]="!form.valid" [raised]="true" severity="info" />
-      </div>
-    </div>
-    @if (i < (folkloreQuizManager.activeQuestions()?.length ?? 0) - 1) {
-      <p-divider />
-    }
+              <!-- Options -->
+              <form class="flex flex-column gap-2">
+                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_1" (onClick)="selectAnswer(1, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button1Severity()" />
+                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_2" (onClick)="selectAnswer(2, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button2Severity()" />
+                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_3" (onClick)="selectAnswer(3, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button3Severity()" />
+                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_4" (onClick)="selectAnswer(4, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button4Severity()" />
+              </form>
+
+              <!-- Validation -->
+              <div class="flex justify-content-end">
+                <p-button [label]="'Valider'" (click)="onSubmit()" [disabled]="!form.valid" [raised]="true" severity="info" />
+              </div>
+            </div>
+
+          </div>
+          <div class="flex pt-6 justify-end">
+            <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
+          </div>
+          <div class="pb-8"></div>
+        </ng-template>
+      </p-step-panel>
+    </p-step-panels>
+  </p-stepper>
   }
-  <div class="pb-8"></div>
-}
 @else
 {
     <p>Pas de question de folklore actives</p>

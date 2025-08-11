@@ -7,6 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../../../models/question.model';
 import {Toast} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {Step, StepList, StepPanel, StepPanels, Stepper} from 'primeng/stepper';
 
 @Component({
   selector: 'app-quiz-tab-folklore',
@@ -15,7 +16,12 @@ import {MessageService} from 'primeng/api';
     Image,
     Button,
     Divider,
-    Toast
+    Toast,
+    StepPanel,
+    StepList,
+    Stepper,
+    Step,
+    StepPanels
   ],
   providers: [MessageService]
 })
