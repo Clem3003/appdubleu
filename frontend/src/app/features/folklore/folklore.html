@@ -2,19 +2,24 @@
 
   <h2 class="mt-4 text-center">Folklore</h2>
 
-  <p-tabs value="0">
+  <p-tabs value="1">
     <p-tablist>
-      <p-tab value="0">Recent</p-tab>
+<!--      <p-tab value="0">Recent</p-tab>-->
       <p-tab value="1">Folklore</p-tab>
       <p-tab value="2">Chants</p-tab>
       <p-tab value="3">Pins</p-tab>
     </p-tablist>
     <p-tabpanels>
-      <p-tabpanel value="0">
-        <app-tab-general></app-tab-general>
-      </p-tabpanel>
+<!--      <p-tabpanel value="0">-->
+<!--        <app-tab-general></app-tab-general>-->
+<!--      </p-tabpanel>-->
       <p-tabpanel value="1">
-        <app-tab-folklore></app-tab-folklore>
+        <div>
+          <p-button icon="pi pi-arrow-right" label="Quiz" *ngIf="!showQuizTab" (onClick)="showQuiz()"></p-button>
+          <p-button icon="pi pi-arrow-left" label="Folklore" *ngIf="showQuizTab" (onClick)="showFolklore()"></p-button>
+          <app-tab-folklore *ngIf="!showQuizTab"></app-tab-folklore>
+          <app-quiz-tab-folklore *ngIf="showQuizTab"></app-quiz-tab-folklore>
+        </div>
       </p-tabpanel>
       <p-tabpanel value="2">
         <app-tab-chants></app-tab-chants>

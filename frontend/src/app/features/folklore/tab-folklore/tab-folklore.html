@@ -1,11 +1,12 @@
-<div class="flex flex-row flex-wrap">
-
-  @for (subject of folkloreSubjects; track subject.id) {
-    <p-card class="m-2 w-full" [header]="subject.title">
-      <p class="m-0">
-        Lorem ipsum dolor sit amet...
-      </p>
-    </p-card>
-  }
-
+<div>
+  <div class="flex flex-row flex-wrap">
+    @for (subject of folkloreSubjects; track subject.id) {
+      <p-card class="m-2 w-full" [header]="subject.title">
+        <p class="m-0">
+          Lorem ipsum dolor sit amet...
+        </p>
+      </p-card>
+    }
+  </div>
 </div>
+

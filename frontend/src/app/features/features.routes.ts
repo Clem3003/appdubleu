@@ -17,6 +17,7 @@ const defaultRoutes: Routes = [
 ];
 
 const childrenRoutes: Routes = [
+    { path: '', component: Dashboard },
     { path: 'dashboard', component: Dashboard },
     { path: 'folklore', component: Folklore },
     { path: 'folklore-quiz', component: FolkloreQuiz },

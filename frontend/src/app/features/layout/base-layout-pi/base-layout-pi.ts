@@ -5,6 +5,7 @@ import {dom} from '@fortawesome/fontawesome-svg-core';
 import {NgClass} from '@angular/common';
 import {Menu} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
+import {AuthService} from '../../../user/login/auth/auth.service';
 
 @Component({
   selector: 'app-base-layout-pi',
@@ -17,6 +18,7 @@ import {MenuItem} from 'primeng/api';
 })
 export class BaseLayoutPi implements  OnInit {
   private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
   private readonly cd = inject(ChangeDetectorRef);
   protected readonly accountMenuItems: MenuItem[] = [
     {
@@ -28,7 +30,8 @@ export class BaseLayoutPi implements  OnInit {
         },
         {
           label: 'Logout',
-          icon: 'pi pi-sign-out'
+          icon: 'pi pi-sign-out',
+          command: () => this.authService.logout()
         }
       ]
     },

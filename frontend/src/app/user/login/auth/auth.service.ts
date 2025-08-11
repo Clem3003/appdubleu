@@ -24,6 +24,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    window.location.reload();
   }
 
   isLoggedIn(): boolean {
