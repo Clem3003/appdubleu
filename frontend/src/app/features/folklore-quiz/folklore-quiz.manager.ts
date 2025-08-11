@@ -11,7 +11,7 @@ export class FolkloreQuizManager {
 
   // Evacuation Info
   // @ts-ignore
-  public readonly activeQuestions: Signal<Question[]> = derivedAsync(() => this.folkloreQuizService.getFolkloreQuizQuestions().pipe(catchError(() => of(null))));
+  public readonly activeQuestions: Signal<Question[]> = derivedAsync(() => this.folkloreQuizService.getFourRandomActiveQuestions().pipe(catchError(() => of(null))));
 
   constructor() {
     console.log('FolkloreManager created');

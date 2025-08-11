@@ -27,6 +27,10 @@ public class QuizEntity {
     @OneToMany(cascade = CascadeType.ALL)
     private List<QuestionEntity> questions;
 
+    private LocalDateTime startedAt;
+    private LocalDateTime endedAt;
+
+
     @ManyToOne
     private StLoUserEntity createdBy;
     private LocalDateTime createdAt;

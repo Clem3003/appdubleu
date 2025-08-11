@@ -57,23 +57,27 @@ public class QuestionAttemptService {
         return mapper.toDto(response);
     }
 
-
     private boolean isAnswerCorrect(QuestionEntity questionEntity, String answer){
         switch (questionEntity.getCorrectAnswer()){
             case 1:
                 if (answer.equals(questionEntity.getSuggestedAnswer_1()))
                     return true;
+                break;
             case 2:
                 if (answer.equals(questionEntity.getSuggestedAnswer_2()))
                     return true;
+                break;
             case 3:
                 if (answer.equals(questionEntity.getSuggestedAnswer_3()))
                     return true;
+                break;
             case 4:
                 if (answer.equals(questionEntity.getSuggestedAnswer_4()))
                     return true;
+                break;
             default:
                 return false;
         }
+        return false;
     }
 }
