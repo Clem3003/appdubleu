@@ -1,6 +1,6 @@
 import {inject, Injectable, Signal} from '@angular/core';
 import {derivedAsync} from 'ngxtension/derived-async';
-import {of} from 'rxjs';
+import {of, tap, timeout} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {FolkloreQuizService} from './folklore-quiz.service';
 import {Question} from '../../models/question.model';
@@ -13,6 +13,14 @@ export class FolkloreQuizManager {
   // @ts-ignore
   public readonly activeQuestions: Signal<Question[]> = derivedAsync(() => this.folkloreQuizService.getFolkloreQuizQuestions().pipe(catchError(() => of(null))));
 
+  constructor() {
+    console.log('FolkloreManager created');
+    console.log(this.activeQuestions());
+    setTimeout(() => {
+      console.log('FolkloreManager created');
+      console.log(this.activeQuestions());
+    }, 3000);
+  }
 
   // constructor() {
   //   this.hasTriggerEvacuationPermission$
@@ -43,4 +51,7 @@ export class FolkloreQuizManager {
   //     });
   //   }
   // }
+  submitAnswer(value: any) {
+    return this.folkloreQuizService.submitAnswer(value);
+  }
 }

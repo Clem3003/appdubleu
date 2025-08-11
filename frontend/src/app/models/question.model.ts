@@ -21,3 +21,11 @@ export interface Question {
   createdBy: StLoUser;
   createdAt: string;
 }
+export interface QuestionAttemptResponse {
+  id: string;
+  attemptAnswer: string;
+  success: boolean;
+
+  createdBy: StLoUser;
+  createdAt: string;
+}

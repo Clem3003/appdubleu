@@ -4,7 +4,8 @@ import {RegisterRequest} from '../../register/register.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly API_URL = 'https://cbsaintlaurent.be/api/auth';
+  // private readonly API_URL = 'https://cbsaintlaurent.be/api/auth'; // TODO : SWITCH DEV/PROD
+  private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : SWITCH DEV/PROD
   private readonly TOKEN_KEY = 'jwt_token';
 
   constructor(private http: HttpClient) {}
