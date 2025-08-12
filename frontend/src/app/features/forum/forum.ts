@@ -10,6 +10,7 @@ import {GroupMessages} from './group-messages/group-messages';
 import {PrivateMessages} from './private-messages/private-messages';
 import {FolkloreDemoDialog} from '../layout/demo-dialogs/folklore-demo-dialog/folklore-demo-dialog';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {MessageDemoDialog} from '../layout/demo-dialogs/message-demo-dialog/message-demo-dialog';
 
 @Component({
   selector: 'app-forum',
@@ -36,7 +37,7 @@ export class Forum {
   protected ref: DynamicDialogRef | undefined;
 
   toggleForumDemoDialog() {
-    this.ref = this.dialogService.open(FolkloreDemoDialog, {
+    this.ref = this.dialogService.open(MessageDemoDialog, {
       header: 'Forum - Info',
       width: '90vw',
       height: '180vw',
