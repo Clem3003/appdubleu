@@ -14,12 +14,12 @@ export class FolkloreQuizManager {
   public readonly activeQuestions: Signal<Question[]> = derivedAsync(() => this.folkloreQuizService.getFourRandomActiveQuestions().pipe(catchError(() => of(null))));
 
   constructor() {
-    console.log('FolkloreManager created');
-    console.log(this.activeQuestions());
-    setTimeout(() => {
-      console.log('FolkloreManager created');
-      console.log(this.activeQuestions());
-    }, 3000);
+    // console.log('FolkloreManager created');
+    // console.log(this.activeQuestions());
+    // setTimeout(() => {
+    //   console.log('FolkloreManager created');
+    //   console.log(this.activeQuestions());
+    // }, 3000);
   }
 
   // constructor() {
