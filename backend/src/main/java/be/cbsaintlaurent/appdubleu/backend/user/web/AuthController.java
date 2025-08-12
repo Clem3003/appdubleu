@@ -2,6 +2,8 @@ package be.cbsaintlaurent.appdubleu.backend.user.web;
 
 import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
+import be.cbsaintlaurent.appdubleu.backend.user.exception.BadCredentialsException;
+import be.cbsaintlaurent.appdubleu.backend.user.exception.UserDisabledException;
 import be.cbsaintlaurent.appdubleu.backend.user.service.AuthService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,13 +26,17 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        String token = service.login(request.getUsername(), request.getPassword());
-        if (token == null) {
-            System.out.println("login fail");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        try {
+            String token = service.login(request.getUsername(), request.getPassword());
+            System.out.println("login ok");
+            return ResponseEntity.ok(new JwtResponse(token));
+        } catch (BadCredentialsException e) {
+            System.out.println("login fail: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        } catch (UserDisabledException e) {
+            System.out.println("login fail: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
-        System.out.println("login ok");
-        return ResponseEntity.ok(new JwtResponse(token));
     }
 
     @PostMapping("/register")

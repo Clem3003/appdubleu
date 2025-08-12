@@ -91,4 +91,7 @@ export class BaseLayoutPi implements  OnInit {
   protected readonly profileIconType = computed(() =>
     this.currentPage() === '/profile' ? 'fa-solid' : 'fa-regular'
   );
+
+  toggleDemoDialog() {
+  }
 }

@@ -3,13 +3,15 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import {Router, RouterLink} from '@angular/router';
 import { InputText } from 'primeng/inputtext';
 import {LoginManager} from '../login.manager';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-login-form',
   imports: [
     ReactiveFormsModule,
     InputText,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './login-form.html',
   standalone: true
@@ -19,9 +21,15 @@ export class LoginForm implements OnInit, OnDestroy {
   protected form!: FormGroup;
   private manager = inject(LoginManager);
   private readonly router = inject(Router);
+  protected errorMessage: string | null = null;
 
   ngOnInit() {
     this.initForm();
+    this.form.get('username')?.valueChanges.subscribe(value => {
+      if (value !== value.toLowerCase()) {
+        this.form.get('username')?.setValue(value.toLowerCase(), { emitEvent: false });
+      }
+    });
   }
 
   private initForm(): void {
@@ -49,6 +57,17 @@ export class LoginForm implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Échec de la connexion', err);
+
+        // Analyse de l'erreur selon le status ou message
+        if (err.status === 401) {
+          // Erreur Bad Credentials
+          this.errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
+        } else if (err.status === 403) {
+          // Compte désactivé
+          this.errorMessage = "Votre compte est désactivé, contactez votre administrateur.";
+        } else {
+          this.errorMessage = "Une erreur est survenue, veuillez réessayer plus tard.";
+        }
       }
     });
   }

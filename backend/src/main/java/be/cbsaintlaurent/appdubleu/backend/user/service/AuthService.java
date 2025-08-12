@@ -4,6 +4,8 @@ import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
+import be.cbsaintlaurent.appdubleu.backend.user.exception.BadCredentialsException;
+import be.cbsaintlaurent.appdubleu.backend.user.exception.UserDisabledException;
 import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,22 +28,21 @@ public class AuthService {
 
     @Transactional
     public String login(String username, String password) {
-        Optional<StLoUserEntity> user = userRepository.findByUsername(username);
-        if (user.isEmpty()) {
-            return null; // User not found
-        }
-        if(!user.get().isEnabled()){
-            return null; // User disabled/ banned
-        }
-        if (!passwordEncoder.matches(password, user.get().getPassword())) {
-            return null; // Password incorrect
+        StLoUserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
+
+        if (!user.isEnabled()) {
+            throw new UserDisabledException("User account is disabled");
         }
 
-        StLoUserEntity u = user.get();
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException("Invalid credentials");
+        }
+
         return jwtService.generateToken(
-                u.getUsername(),
-                u.getId().toString(),
-                u.getRole() == StLoRole.ADMIN
+                user.getUsername(),
+                user.getId().toString(),
+                user.getRole() == StLoRole.ADMIN
         );
     }
 
