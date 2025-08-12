@@ -7,8 +7,10 @@
 
   <!-- Compte à droite -->
   <div class="flex items-center ml-auto">
-    <i class="fa-solid fa-circle-question fa-beat-fade fa-2xl mr-3" style="color: #FFD43B;" (click)="toggleDemoDialog()" ></i>
-    <i class="pi pi-user text-2xl" (click)="menu.toggle($event)"></i>
+    <span (click)="toggleDemoDialog()">
+      <i class="fa-regular fa-circle-question fa-beat-fade fa-2xl mr-3" style="color: #ff0000;"></i>
+    </span>
+      <i class="pi pi-user text-2xl" (click)="menu.toggle($event)"></i>
   </div>
   <p-menu #menu [model]="accountMenuItems" [popup]="true"
           appendTo="body"

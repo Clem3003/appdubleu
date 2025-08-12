@@ -6,6 +6,12 @@ import {NgClass} from '@angular/common';
 import {Menu} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {AuthService} from '../../../user/login/auth/auth.service';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DashboardDemoDialog} from '../demo-dialogs/dashboard-demo-dialog/dashboard-demo-dialog';
+import {FolkloreDemoDialog} from '../demo-dialogs/folklore-demo-dialog/folklore-demo-dialog';
+import {MessageDemoDialog} from '../demo-dialogs/message-demo-dialog/message-demo-dialog';
+import {CompteDemoDialog} from '../demo-dialogs/compte-demo-dialog/compte-demo-dialog';
+import {DemoDialog} from '../demo-dialogs/demo-dialog/demo-dialog';
 
 @Component({
   selector: 'app-base-layout-pi',
@@ -14,12 +20,15 @@ import {AuthService} from '../../../user/login/auth/auth.service';
     RouterLink,
     Menu
   ],
+  providers: [DialogService],
   templateUrl: './base-layout-pi.html'
 })
 export class BaseLayoutPi implements  OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly cd = inject(ChangeDetectorRef);
+  protected ref: DynamicDialogRef | undefined;
+  private dialogService: DialogService = inject(DialogService)
   protected readonly accountMenuItems: MenuItem[] = [
     {
       label: 'Profile',
@@ -93,5 +102,38 @@ export class BaseLayoutPi implements  OnInit {
   );
 
   toggleDemoDialog() {
+    this.ref = this.dialogService.open(DemoDialog, {
+          header: 'Demo - Info',
+          width: '90vw',
+          height: '180vw',
+        });
+    // if (this.currentPage() === '/dashboard' || this.currentPage() === '/'){
+    //   this.ref = this.dialogService.open(DashboardDemoDialog, {
+    //     header: 'Dashboard - Info',
+    //     width: '90vw',
+    //     height: '180vw',
+    //   });
+    // }
+    // if (this.currentPage() === '/folklore'){
+    //   this.ref = this.dialogService.open(FolkloreDemoDialog, {
+    //     header: 'Folklore - Info',
+    //     width: '90vw',
+    //     height: '180vw',
+    //   });
+    // }
+    // if (this.currentPage() === '/forum'){
+    //   this.ref = this.dialogService.open(MessageDemoDialog, {
+    //     header: 'Forum - Info',
+    //     width: '90vw',
+    //     height: '180vw',
+    //   });
+    // }
+    // if (this.currentPage() === '/profile'){
+    //   this.ref = this.dialogService.open(CompteDemoDialog, {
+    //     header: 'Profile - Info',
+    //     width: '90vw',
+    //     height: '180vw',
+    //   });
+    // }
   }
 }
