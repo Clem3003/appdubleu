@@ -2,6 +2,7 @@ import {StLoUser} from '../user/login/login.model';
 import {BaptismalSong} from './song.model';
 import {FolkloreSubject} from './folklore-subject.model';
 import {PennePins} from './pins.model';
+import {ButtonSeverity} from 'primeng/button';
 
 export interface Question {
   id: string;
@@ -28,4 +29,9 @@ export interface QuestionAttemptResponse {
 
   createdBy: StLoUser;
   createdAt: string;
+}
+export interface Answer {
+  label: string;
+  index: number;
+  severity?: ButtonSeverity;
 }

@@ -12,10 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -47,6 +44,11 @@ public class AuthController {
         private String token;
     }
 
+    @GetMapping("/version")
+    public String getVersion() {
+        return "Demo v0.0.1";
+    }
+
     // TODO : to be removed, testing purposes
     @PostMapping("/ping")
     public String ping() {
@@ -56,6 +58,7 @@ public class AuthController {
     // TODO : to be removed, testing purposes
     @PostMapping("/secured_ping")
     public String securedPing() {
+        System.out.println("secured-pong");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("Current Authentication: " + auth);
         System.out.println("isAuthenticated: " + auth.isAuthenticated());

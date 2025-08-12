@@ -66,7 +66,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Pas de session serveur
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/ping").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/ping", "/api/auth/version").permitAll()
                         .requestMatchers("/api/**").authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

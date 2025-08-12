@@ -30,7 +30,7 @@ public class JwtService {
 
     public String generateToken(String subject, String id, boolean isAdmin) {
         long nowMillis = System.currentTimeMillis();
-        long expMillis = nowMillis + 1000 * 60 * 60; // 1 heure
+        long expMillis = nowMillis + 1000 * 60 * 60 * 10; // 10 heures TODO : CHANGER ça
         Date exp = new Date(expMillis);
 
         return Jwts.builder()

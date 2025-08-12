@@ -26,10 +26,13 @@
 
               <!-- Options -->
               <form class="flex flex-column gap-2">
-                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_1" (onClick)="selectAnswer(1, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button1Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_2" (onClick)="selectAnswer(2, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button2Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_3" (onClick)="selectAnswer(3, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button3Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[0].suggestedAnswer_4" (onClick)="selectAnswer(4, folkloreQuizManager.activeQuestions()[0])" [raised]="true" [severity]="button4Severity()" />
+                <ng-container *ngFor="let answer of shuffledAnswers1">
+                  <p-button
+                    [label]="answer.label"
+                    (onClick)="selectAnswer(answer.index, folkloreQuizManager.activeQuestions()[0])"
+                    [raised]="true"
+                    [severity]="getButtonSeverity(answer.index)" />
+                </ng-container>
               </form>
 
               <!-- Validation -->
@@ -39,7 +42,7 @@
             </div>
 
           </div>
-          <div class="flex pt-6 justify-end">
+          <div class="flex pt-6 justify-end" (click)="resetSelection()">
             <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(2)" />
           </div>
           <div class="pb-8"></div>
@@ -53,7 +56,7 @@
           <div class="flex flex-col h-48">
             <div class="flex flex-column gap-4 py-3">
               <!-- Prompt / Question -->
-              <h2 class="text-2xl">Question 1 :</h2>
+              <h2 class="text-2xl">Question 2 :</h2>
               <div class="flex flex-row gap-3">
                 <p-image [src]="folkloreQuizManager.activeQuestions()[1].folkloreSubject.pictureUrl" alt="question.pictureUrl" width="100" [preview]="true" />
                 <h3 class="text-2xl pt-3">{{ folkloreQuizManager.activeQuestions()[1].prompt }}</h3>
@@ -61,10 +64,13 @@
 
               <!-- Options -->
               <form class="flex flex-column gap-2">
-                <p-button [label]="folkloreQuizManager.activeQuestions()[1].suggestedAnswer_1" (onClick)="selectAnswer(1, folkloreQuizManager.activeQuestions()[1])" [raised]="true" [severity]="button1Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[1].suggestedAnswer_2" (onClick)="selectAnswer(2, folkloreQuizManager.activeQuestions()[1])" [raised]="true" [severity]="button2Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[1].suggestedAnswer_3" (onClick)="selectAnswer(3, folkloreQuizManager.activeQuestions()[1])" [raised]="true" [severity]="button3Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[1].suggestedAnswer_4" (onClick)="selectAnswer(4, folkloreQuizManager.activeQuestions()[1])" [raised]="true" [severity]="button4Severity()" />
+                <ng-container *ngFor="let answer of shuffledAnswers2">
+                  <p-button
+                    [label]="answer.label"
+                    (onClick)="selectAnswer(answer.index, folkloreQuizManager.activeQuestions()[1])"
+                    [raised]="true"
+                    [severity]="getButtonSeverity(answer.index)" />
+                </ng-container>
               </form>
 
               <!-- Validation -->
@@ -74,10 +80,11 @@
             </div>
 
           </div>
-          <div class="flex pt-6 justify-between">
+          <div class="flex pt-6 justify-between" (click)="resetSelection()">
             <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
             <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
           </div>
+          <div class="pb-8"></div>
         </ng-template>
       </p-step-panel>
       <!-- ------------------------- -->
@@ -88,7 +95,7 @@
           <div class="flex flex-col h-48">
             <div class="flex flex-column gap-4 py-3">
               <!-- Prompt / Question -->
-              <h2 class="text-2xl">Question 1 :</h2>
+              <h2 class="text-2xl">Question 3 :</h2>
               <div class="flex flex-row gap-3">
                 <p-image [src]="folkloreQuizManager.activeQuestions()[2].folkloreSubject.pictureUrl" alt="question.pictureUrl" width="100" [preview]="true" />
                 <h3 class="text-2xl pt-3">{{ folkloreQuizManager.activeQuestions()[2].prompt }}</h3>
@@ -96,10 +103,13 @@
 
               <!-- Options -->
               <form class="flex flex-column gap-2">
-                <p-button [label]="folkloreQuizManager.activeQuestions()[2].suggestedAnswer_1" (onClick)="selectAnswer(1, folkloreQuizManager.activeQuestions()[2])" [raised]="true" [severity]="button1Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[2].suggestedAnswer_2" (onClick)="selectAnswer(2, folkloreQuizManager.activeQuestions()[2])" [raised]="true" [severity]="button2Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[2].suggestedAnswer_3" (onClick)="selectAnswer(3, folkloreQuizManager.activeQuestions()[2])" [raised]="true" [severity]="button3Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[2].suggestedAnswer_4" (onClick)="selectAnswer(4, folkloreQuizManager.activeQuestions()[2])" [raised]="true" [severity]="button4Severity()" />
+                <ng-container *ngFor="let answer of shuffledAnswers3">
+                  <p-button
+                    [label]="answer.label"
+                    (onClick)="selectAnswer(answer.index, folkloreQuizManager.activeQuestions()[2])"
+                    [raised]="true"
+                    [severity]="getButtonSeverity(answer.index)" />
+                </ng-container>
               </form>
 
               <!-- Validation -->
@@ -109,10 +119,12 @@
             </div>
 
           </div>
-          <div class="flex pt-6 justify-between">
-            <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(1)" />
-            <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(3)" />
+          <div class="flex pt-6 justify-between" (click)="resetSelection()">
+            <p-button label="Back" severity="secondary" icon="pi pi-arrow-left" (onClick)="activateCallback(2)" />
+            <p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="activateCallback(4)" />
           </div>
+          <div class="pb-8"></div>
+
         </ng-template>
       </p-step-panel>
 
@@ -124,7 +136,7 @@
           <div class="flex flex-col h-48">
             <div class="flex flex-column gap-4 py-3">
               <!-- Prompt / Question -->
-              <h2 class="text-2xl">Question 1 :</h2>
+              <h2 class="text-2xl">Question 4 :</h2>
               <div class="flex flex-row gap-3">
                 <p-image [src]="folkloreQuizManager.activeQuestions()[3].folkloreSubject.pictureUrl" alt="question.pictureUrl" width="100" [preview]="true" />
                 <h3 class="text-2xl pt-3">{{ folkloreQuizManager.activeQuestions()[3].prompt }}</h3>
@@ -132,10 +144,13 @@
 
               <!-- Options -->
               <form class="flex flex-column gap-2">
-                <p-button [label]="folkloreQuizManager.activeQuestions()[3].suggestedAnswer_1" (onClick)="selectAnswer(1, folkloreQuizManager.activeQuestions()[3])" [raised]="true" [severity]="button1Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[3].suggestedAnswer_2" (onClick)="selectAnswer(2, folkloreQuizManager.activeQuestions()[3])" [raised]="true" [severity]="button2Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[3].suggestedAnswer_3" (onClick)="selectAnswer(3, folkloreQuizManager.activeQuestions()[3])" [raised]="true" [severity]="button3Severity()" />
-                <p-button [label]="folkloreQuizManager.activeQuestions()[3].suggestedAnswer_4" (onClick)="selectAnswer(4, folkloreQuizManager.activeQuestions()[3])" [raised]="true" [severity]="button4Severity()" />
+                <ng-container *ngFor="let answer of shuffledAnswers4">
+                  <p-button
+                    [label]="answer.label"
+                    (onClick)="selectAnswer(answer.index, folkloreQuizManager.activeQuestions()[3])"
+                    [raised]="true"
+                    [severity]="getButtonSeverity(answer.index)" />
+                </ng-container>
               </form>
 
               <!-- Validation -->
@@ -145,9 +160,11 @@
             </div>
 
           </div>
-          <div class="flex pt-6 justify-start">
-            <p-button label="Back" icon="pi pi-arrow-left" iconPos="right" (onClick)="activateCallback(2)" />
+          <div class="flex pt-6 justify-start" (click)="resetSelection()">
+            <p-button label="Back" icon="pi pi-arrow-left" iconPos="left" (onClick)="activateCallback(3)" />
           </div>
+          <div class="pb-8"></div>
+
         </ng-template>
       </p-step-panel>
     </p-step-panels>

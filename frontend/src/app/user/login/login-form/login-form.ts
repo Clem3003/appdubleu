@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { InputText } from 'primeng/inputtext';
 import {LoginManager} from '../login.manager';
 
@@ -8,7 +8,8 @@ import {LoginManager} from '../login.manager';
   selector: 'app-login-form',
   imports: [
     ReactiveFormsModule,
-    InputText
+    InputText,
+    RouterLink
   ],
   templateUrl: './login-form.html',
   standalone: true

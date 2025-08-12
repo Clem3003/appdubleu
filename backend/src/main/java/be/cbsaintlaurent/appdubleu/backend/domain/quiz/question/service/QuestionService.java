@@ -52,6 +52,7 @@ public class QuestionService {
         questionEntity.setSuggestedAnswer_3(request.getSuggestedAnswer_3());
         questionEntity.setSuggestedAnswer_4(request.getSuggestedAnswer_4());
         questionEntity.setCorrectAnswer(request.getCorrectAnswer());
+        questionEntity.setActive(request.getActive());
         questionEntity.setCreatedBy(userEntity);
         questionEntity.setBaptismalSong(null);
         questionEntity.setFolkloreSubject(folkloreSubjectRepository.findById(request.getFolkloreSubject().getId()));
