@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {RegisterRequest} from '../../register/register.model';
-import {of, tap} from 'rxjs';
+import {Observable, of, tap} from 'rxjs';
+import {StLoUser} from '../login.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
       tap((user: any) => {
         this.currentUser = user; // ← on sauvegarde l'utilisateur
       })
-    );;
+    );
   }
 
   logout() {
@@ -31,11 +32,11 @@ export class AuthService {
       { withCredentials: true } // ✅ envoie le cookie pour destruction
     );
   }
-  me() {
+  me(): Observable<StLoUser> {
     if (this.currentUser) {
       return of(this.currentUser); // déjà connecté
     }
-    return this.http.get('/api/me'); // sinon, requête vers le serveur
+    return this.http.get<StLoUser>(`${this.API_URL}/me`); // sinon, requête vers le serveur
   }
   register(request: RegisterRequest) {
     return this.http.post(`${this.API_URL}/register`, request, { withCredentials: true });

@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {CanActivate, Router} from '@angular/router';
-import {catchError, map, of} from 'rxjs';
+import {map, of} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {AuthService} from './user/login/auth/auth.service';
+import {CanActivate, Router} from '@angular/router';
+import {Injectable} from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class RedirectLoginGuard implements CanActivate {
@@ -10,13 +11,15 @@ export class RedirectLoginGuard implements CanActivate {
   canActivate() {
     return this.authService.me().pipe(
       map(user => {
-        // ✅ Si connecté → redirige vers l'accueil
-        return this.router.createUrlTree(['/']);
+        if (user && user.username) {
+          // Déjà connecté → redirige vers home
+          return this.router.createUrlTree(['/']);
+        } else {
+          // Pas connecté → peut accéder à login
+          return true;
+        }
       }),
-      catchError(() => {
-        // ❌ Pas connecté → accès au login autorisé
-        return of(true);
-      })
+      catchError(() => of(true)) // pas connecté → peut accéder à login
     );
   }
 }

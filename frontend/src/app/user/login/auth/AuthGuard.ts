@@ -9,15 +9,19 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate() {
+    console.log('AuthGuard: canActivate');
     return this.authService.me().pipe(
       map(user => {
-        // ✅ L'utilisateur est connecté
-        return true;
+        console.log('me() response', user);
+        if (user && user.username) {
+          return true;
+        } else {
+          return this.router.createUrlTree(['/login']);
+        }
       }),
-      catchError(() => {
-        // ❌ Pas connecté → redirection
+      catchError(err => {
+        console.log('me() error', err);
         return of(this.router.createUrlTree(['/login']));
-      })
-    );
+      }))
   }
 }

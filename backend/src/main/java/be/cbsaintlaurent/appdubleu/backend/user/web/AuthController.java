@@ -2,7 +2,9 @@ package be.cbsaintlaurent.appdubleu.backend.user.web;
 
 import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
+import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
 import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
+import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
 import be.cbsaintlaurent.appdubleu.backend.user.exception.BadCredentialsException;
 import be.cbsaintlaurent.appdubleu.backend.user.exception.UserDisabledException;
 import be.cbsaintlaurent.appdubleu.backend.user.service.AuthService;
@@ -67,8 +69,20 @@ public class AuthController {
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(401).body("Not authenticated");
         }
-        return ResponseEntity.ok(authentication.getPrincipal());
+
+        // Ici on suppose que le principal est le username (String)
+        String username = authentication.getName();
+        String role = authentication.getAuthorities().stream()
+                .map(a -> a.getAuthority())
+                .findFirst()
+                .orElse("");
+
+        StLoUser stLoUser = new StLoUser();
+        stLoUser.setUsername(username);
+        stLoUser.setRole(StLoRole.ADMIN);
+        return ResponseEntity.ok(stLoUser);
     }
+
 
     public record LoginRequest(String username, String password) {}
 }
