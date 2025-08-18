@@ -68,7 +68,8 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        return false; // TOKEN never expires .. FOR DEMO ONLY
+//        return extractExpiration(token).before(new Date());
     }
 
     public boolean isTokenValid(String token, org.springframework.security.core.userdetails.UserDetails userDetails) {

@@ -46,24 +46,20 @@ export class LoginForm implements OnInit, OnDestroy {
       return;
     }
 
-    // Récupération sécurisée des valeurs (non typée)
     const username = this.form.get('username')?.value;
     const password = this.form.get('password')?.value;
 
     this.manager.login(username, password).subscribe({
       next: (res) => {
-        console.log('Success', res.token); // TODO : Remove this
+        console.log('Login success', res); // plus de token ici
         this.router.navigate(['/']);
       },
       error: (err) => {
         console.error('Échec de la connexion', err);
 
-        // Analyse de l'erreur selon le status ou message
         if (err.status === 401) {
-          // Erreur Bad Credentials
           this.errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
         } else if (err.status === 403) {
-          // Compte désactivé
           this.errorMessage = "Votre compte est désactivé, contactez votre administrateur.";
         } else {
           this.errorMessage = "Une erreur est survenue, veuillez réessayer plus tard.";

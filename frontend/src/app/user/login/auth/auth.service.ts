@@ -1,37 +1,43 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {RegisterRequest} from '../../register/register.model';
+import {of, tap} from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  // private readonly API_URL = 'https://cbsaintlaurent.be/api/auth'; // TODO : SWITCH DEV/PROD
-  private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : SWITCH DEV/PROD
-  private readonly TOKEN_KEY = 'jwt_token';
+  private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : switch dev/prod
 
   constructor(private http: HttpClient) {}
 
+  private currentUser: any = null;
+
   login(username: string, password: string) {
-    return this.http.post<{ token: string }>(`${this.API_URL}/login`, { username, password });
+    return this.http.post(
+      `${this.API_URL}/login`,
+      { username, password },
+      { withCredentials: true } // ✅ indispensable pour gérer JSESSIONID
+    ).pipe(
+      tap((user: any) => {
+        this.currentUser = user; // ← on sauvegarde l'utilisateur
+      })
+    );;
   }
 
-  saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+  logout() {
+    this.currentUser = null;
+    return this.http.post(
+      `${this.API_URL}/logout`,
+      {},
+      { withCredentials: true } // ✅ envoie le cookie pour destruction
+    );
   }
-
-  getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+  me() {
+    if (this.currentUser) {
+      return of(this.currentUser); // déjà connecté
+    }
+    return this.http.get('/api/me'); // sinon, requête vers le serveur
   }
-
-  logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    window.location.reload();
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getToken();
-  }
-
   register(request: RegisterRequest) {
-    return this.http.post(`${this.API_URL}/register`, request);
+    return this.http.post(`${this.API_URL}/register`, request, { withCredentials: true });
   }
 }

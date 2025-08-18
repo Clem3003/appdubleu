@@ -27,7 +27,7 @@ public class AuthService {
     private final JwtService jwtService;
 
     @Transactional
-    public String login(String username, String password) {
+    public StLoUserEntity login(String username, String password) {
         StLoUserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
 
@@ -39,11 +39,7 @@ public class AuthService {
             throw new BadCredentialsException("Invalid credentials");
         }
 
-        return jwtService.generateToken(
-                user.getUsername(),
-                user.getId().toString(),
-                user.getRole() == StLoRole.ADMIN
-        );
+        return user; // ✅ plus de token, on renvoie l'utilisateur
     }
 
     @Transactional
