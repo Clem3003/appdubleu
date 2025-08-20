@@ -4,31 +4,42 @@
 <br>
 
 
-<h2 class="mt-4 mb-2 mx-5 text-3xl">Bonjour {{ (authService.isBlue()?"Bleu":authService.currentUser()?.role) }} <span (click)="toggleDashboardDemoDialog()">
+<h2 class="mt-4 mb-2 mx-5 text-3xl">Bonjour {{ (authService.isBlue()?"bleu":authService.currentUser()?.role) }} <span (click)="toggleDashboardDemoDialog()">
       <i class="fa-regular fa-circle-question fa-xl mr-3" style="color: #283792;"></i>
     </span></h2>
-<p-card header="Statut" class="m-4">
-  <div class="flex flex-row justify-content-between">
-    <div class="flex flex-row">
-<!--      <div class="flex align-items-center justify-content-center-->
-<!--      border-round bg-primary text-white-->
-<!--      w-3rem h-3rem shadow-2">-->
-<!--        <i class="pi pi-user text-3xl"></i>-->
-<!--      </div>-->
-      <div>
-        <div>Bleu Wensel</div>
-        <div>21ans</div>
-        <div><i>Penne bleue</i></div>
+
+@if (authService.isBlue()){
+  <p-card header="Statut" class="m-4">
+    <div class="flex flex-row justify-content-between">
+      <div class="flex flex-row">
+<!--        <div class="flex align-items-center justify-content-center-->
+<!--        border-round bg-primary text-white-->
+<!--        w-3rem h-3rem shadow-2">-->
+<!--          <i class="pi pi-user text-3xl"></i>-->
+<!--        </div>-->
+        <div>
+          <div>Bleu Wensel</div>
+          <div>21ans</div>
+          <div><i>Penne bleue</i></div>
+        </div>
+      </div>
+      <div class="flex flex-row align-items-end"> <!-- blocage de la valeur directement depuis le CSS pour ne pas avoir le style grisé "disabled" -->
+        <p-knob style="pointer-events: none;" [ngModel]="-15" [min]="-50" [max]="50" [ariaLabel]="'Score'" valueColor="#ff9d00" />
+        <i class="pi pi-info-circle text-1xl bottom-0" (click)="showScoreInfoDialog()"></i>
       </div>
     </div>
-    <div class="flex flex-row align-items-end"> <!-- blocage de la valeur directement depuis le CSS pour ne pas avoir le style grisé "disabled" -->
-      <p-knob style="pointer-events: none;" [ngModel]="-15" [min]="-50" [max]="50" [ariaLabel]="'Score'" valueColor="#ff9d00" />
-      <i class="pi pi-info-circle text-1xl bottom-0" (click)="showScoreInfoDialog()"></i>
-    </div>
-  </div>
-</p-card>
+  </p-card>
+} @else {
 
-<p-carousel class="m-4" [value]="products" [page]="1" [circular]="false" [responsiveOptions]="responsiveOptions">
+  <p-card header="Mes Bleus" class="m-4">
+    <div class="flex flex-row justify-content-between">
+
+    </div>
+  </p-card>
+}
+
+<h3 class="mt-4 mb-2 mx-5 text-2xl">Prochaines activités </h3>
+  <p-carousel class="m-4 mt-2" [value]="products" [page]="1" [circular]="false" [responsiveOptions]="responsiveOptions">
   <ng-template let-product #item>
     <div class="border border-surface rounded-border m-2 p-4">
       <div class="mb-4">

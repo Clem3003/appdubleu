@@ -41,11 +41,11 @@ export class AuthService {
     );
   }
 
-  me(): Observable<StLoUser> {
-    if (this.currentUser) {
-      return of(this.currentUser()!);
+  me(): Observable<StLoUser | null> {
+    if (this.currentUser()) {
+      return of(this.currentUser());
     }
-    return this.http.get<StLoUser>(`${this.API_URL}/me`).pipe(); // sinon, requête vers le serveur
+    return this.http.get<StLoUser>(`${this.API_URL}/me`); // sinon, requête vers le serveur
   }
 
   register(request: RegisterRequest) {
@@ -57,11 +57,13 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return this.currentUser()?.role === 'ADMIN';
+    return false;
+    // return this.currentUser()?.role === 'ADMIN';
   }
 
   isBlue(): boolean {
-    return this.currentUser()?.role === 'BLUE';
+    return false;
+    // return this.currentUser()?.role === 'BLUE';
   }
 
 }
