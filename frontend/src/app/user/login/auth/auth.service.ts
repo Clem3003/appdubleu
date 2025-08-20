@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, signal, WritableSignal} from '@angular/core';
 import {RegisterRequest} from '../../register/register.model';
 import {Observable, of, tap} from 'rxjs';
 import {StLoUser} from '../login.model';
@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  private currentUser: any = null;
+  public currentUser: WritableSignal<StLoUser | null> = signal<StLoUser | null>(null);
 
   login(username: string, password: string) {
     return this.http.post(
@@ -21,14 +21,14 @@ export class AuthService {
       { withCredentials: true } // ✅ indispensable pour gérer JSESSIONID
     ).pipe(
       tap((user: any) => {
-        this.currentUser = user; // ← on sauvegarde l'utilisateur
+        this.currentUser.set(user); // ← on sauvegarde l'utilisateur
       })
     );
   }
 
   logout() {
     console.log('logout');
-    this.currentUser = null;
+    this.currentUser.set(null);
     console.log(this.currentUser);
     return this.http.post(
       `${this.API_URL}/logout`,
@@ -43,11 +43,25 @@ export class AuthService {
 
   me(): Observable<StLoUser> {
     if (this.currentUser) {
-      return of(this.currentUser); // déjà connecté
+      return of(this.currentUser()!);
     }
-    return this.http.get<StLoUser>(`${this.API_URL}/me`); // sinon, requête vers le serveur
+    return this.http.get<StLoUser>(`${this.API_URL}/me`).pipe(); // sinon, requête vers le serveur
   }
+
   register(request: RegisterRequest) {
     return this.http.post(`${this.API_URL}/register`, request, { withCredentials: true });
   }
+
+  hasRole(role: string): boolean {
+    return this.currentUser()?.role === role;
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser()?.role === 'ADMIN';
+  }
+
+  isBlue(): boolean {
+    return this.currentUser()?.role === 'BLUE';
+  }
+
 }

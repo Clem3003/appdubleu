@@ -27,11 +27,12 @@ import {DashboardDemoDialog} from '../layout/demo-dialogs/dashboard-demo-dialog/
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit {
+  protected authService: AuthService = inject(AuthService)
   private dialogService: DialogService = inject(DialogService)
   private http: HttpClient = inject(HttpClient)
-  private authService: AuthService = inject(AuthService);
 
   protected ref: DynamicDialogRef | undefined;
+
 
   showScoreInfoDialog() {
     this.ref = this.dialogService.open(ScoreInfoDialog, {

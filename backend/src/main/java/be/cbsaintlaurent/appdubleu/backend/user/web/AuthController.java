@@ -55,7 +55,6 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest httpRequest) {
-        System.out.println("logout");
         authService.clearAuthentication(httpRequest);
         return ResponseEntity.noContent().build();
     }

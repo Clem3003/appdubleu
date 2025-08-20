@@ -6,6 +6,8 @@ export interface UserCredentials {
 export interface StLoUser {
   id: string;
   username: string;
+  nickname?: string;
+  role?: string;
   fullname?: string;
   avatarUrl?: string;
 }
