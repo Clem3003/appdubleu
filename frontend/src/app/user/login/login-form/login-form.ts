@@ -52,7 +52,7 @@ export class LoginForm implements OnInit, OnDestroy {
     this.manager.login(username, password).subscribe({
       next: (res) => {
         console.log('Login success', res); // plus de token ici
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.error('Échec de la connexion', err);

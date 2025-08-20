@@ -23,6 +23,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -32,60 +33,59 @@ public class AuthController {
 
     private final AuthService authService;
 
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+//        StLoUserEntity user = authService.authenticate(request.username(), request.password());
+//        authService.setAuthentication(user, httpRequest);
+//        return ResponseEntity.ok(Map.of("message", "Login successful"));
+//    }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
-        System.out.println("login");
-        StLoUserEntity user = authService.login(request.username(), request.password());
-        System.out.println("login auth service worked");
+    public ResponseEntity<StLoUser> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+        StLoUserEntity user = authService.authenticate(request.username(), request.password());
+        authService.setAuthentication(user, httpRequest);
 
-        // ✅ Crée un Authentication pour Spring Security
-        UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
-                        null,
-                        List.of(() -> user.getRole().name()) // autorité = rôle
-                );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // ✅ Force la création de session -> cookie JSESSIONID
-        httpRequest.getSession(true)
-                .setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
-                        SecurityContextHolder.getContext());
-
-        return ResponseEntity.ok(user); // tu peux renvoyer un DTO avec id/username/role
+        return ResponseEntity.ok(authService.getCurrentUser());
     }
+
+//    @PostMapping("/logout")
+//    public ResponseEntity<?> logout(HttpServletRequest request) {
+//        authService.clearAuthentication(request);
+//        return ResponseEntity.ok(Map.of("message", "Logout successful"));
+//    }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request) {
-        request.getSession().invalidate();
-        SecurityContextHolder.clearContext();
-        return ResponseEntity.ok("Logout success");
+    public ResponseEntity<Void> logout(HttpServletRequest httpRequest) {
+        System.out.println("logout");
+        authService.clearAuthentication(httpRequest);
+        return ResponseEntity.noContent().build();
     }
+
+//    @GetMapping("/me")
+//    public ResponseEntity<?> me() {
+//        StLoUser currentUser = authService.getCurrentUser();
+//        if (currentUser == null) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not authenticated");
+//        }
+//        return ResponseEntity.ok(currentUser);
+//    }
 
     @GetMapping("/me")
-    public ResponseEntity<?> me() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return ResponseEntity.status(401).body("Not authenticated");
+    public ResponseEntity<StLoUser> me() {
+        StLoUser user = authService.getCurrentUser();
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-
-        // Ici on suppose que le principal est le username (String)
-        String username = authentication.getName();
-        String role = authentication.getAuthorities().stream()
-                .map(a -> a.getAuthority())
-                .findFirst()
-                .orElse("");
-
-        StLoUser stLoUser = new StLoUser();
-        stLoUser.setUsername(username);
-        stLoUser.setRole(StLoRole.ADMIN);
-        return ResponseEntity.ok(stLoUser);
+        return ResponseEntity.ok(user);
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        return authService.register(request);
+    }
 
     public record LoginRequest(String username, String password) {}
 }
+
 //public class AuthController {
 //
 //    private final AuthService service;

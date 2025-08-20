@@ -65,7 +65,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/ping", "/api/auth/version").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/me", "/api/auth/ping", "/api/auth/version").permitAll()
                         .requestMatchers("/api/**").authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
@@ -81,7 +81,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:4200", "https://demo-app.cbsaintlaurent.be", "https://cbsaintlaurent.be"));
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
-        configuration.setAllowCredentials(true); // ✅ nécessaire pour envoyer le cookie JSESSIONID
+        configuration.setAllowCredentials(true); // pour envoyer le cookie JSESSIONID
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

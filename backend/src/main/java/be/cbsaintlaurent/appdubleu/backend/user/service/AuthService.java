@@ -2,20 +2,28 @@ package be.cbsaintlaurent.appdubleu.backend.user.service;
 
 import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
+import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
 import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
 import be.cbsaintlaurent.appdubleu.backend.user.exception.BadCredentialsException;
 import be.cbsaintlaurent.appdubleu.backend.user.exception.UserDisabledException;
+import be.cbsaintlaurent.appdubleu.backend.user.mapper.StLoUserMapper;
 import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +31,12 @@ import java.time.LocalDate;
 public class AuthService {
 
     private final StLoUserRepository userRepository;
+    private final StLoUserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
     @Transactional
-    public StLoUserEntity login(String username, String password) {
+    public StLoUserEntity authenticate(String username, String password) {
         StLoUserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new BadCredentialsException("Invalid credentials"));
 
@@ -39,7 +48,41 @@ public class AuthService {
             throw new BadCredentialsException("Invalid credentials");
         }
 
-        return user; // ✅ plus de token, on renvoie l'utilisateur
+        return user;
+    }
+
+    public void setAuthentication(StLoUserEntity user, HttpServletRequest request) {
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(
+                        user.getUsername(),
+                        null,
+                        user.getAuthorities() // ✅ comme ton UserDetails implémente déjà ça
+                );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        request.getSession(true).setAttribute(
+                HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
+                SecurityContextHolder.getContext()
+        );
+    }
+
+    public void clearAuthentication(HttpServletRequest request) {
+        request.getSession().invalidate();
+        SecurityContextHolder.clearContext();
+    }
+
+    public StLoUser getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+
+        // ⚡ ici on va rechercher l’entité complète et la mapper en DTO
+        return userRepository.findByUsername(authentication.getName())
+                .map(userMapper::toDto)
+                .orElse(null);
     }
 
     @Transactional

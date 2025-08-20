@@ -18,7 +18,6 @@ public class StLoUser {
     private LocalDate dateOfBirth;
 
     private String email;
-    private String password;
 
     private StLoRole role;
 

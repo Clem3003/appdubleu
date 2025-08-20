@@ -40,7 +40,7 @@ export class BaseLayoutPi implements  OnInit {
         {
           label: 'Logout',
           icon: 'pi pi-sign-out',
-          command: () => this.authService.logout()
+          command: () => this.authService.logout().subscribe()
         }
       ]
     },
