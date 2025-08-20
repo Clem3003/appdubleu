@@ -3,20 +3,22 @@ import {Card} from 'primeng/card';
 import {Fluid} from 'primeng/fluid';
 import {BaptismalSong, SongTypeEnum} from '../../../models/song.model';
 import {FolkloreSubject} from '../../../models/folklore-subject.model';
+import {Image} from 'primeng/image';
 
 @Component({
   selector: 'app-tab-folklore',
   imports: [
-    Card
+    Card,
+    Image
   ],
   templateUrl: './tab-folklore.html'
 })
 export class TabFolklore {
 
   protected folkloreSubjects: FolkloreSubject[] = [
-    { id: '1', title: 'L’esplanade des terrasses', content: '', pictureUrl: '' },
-    { id: '2', title: 'L’exposition de 1905', content: '', pictureUrl: '' },
-    { id: '4', title: 'Monuments Parc d’Avroy', content: '', pictureUrl: '' },
+    { id: '1', title: 'L’esplanade des terrasses', content: '', pictureUrl: 'assets/les_terrasses_liege.jpg' },
+    { id: '2', title: 'L’exposition de 1905', content: '', pictureUrl: 'assets/expo_1905_liege.jpg' },
+    { id: '4', title: 'Monuments Parc d’Avroy', content: '', pictureUrl: 'assets/monuments_avroy_liege.jpg' },
     { id: '5', title: 'Statue de charlemagne', content: '', pictureUrl: '' },
     { id: '6', title: 'L’Eglise Saint-Jacques-le-Mineur', content: '', pictureUrl: '' },
     { id: '7', title: 'Vertbois', content: '', pictureUrl: '' },

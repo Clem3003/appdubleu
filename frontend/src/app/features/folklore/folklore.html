@@ -17,8 +17,8 @@
 <!--      </p-tabpanel>-->
       <p-tabpanel value="1">
         <div>
-          <p-button icon="pi pi-arrow-right" label="Quiz" *ngIf="!showQuizTab" (onClick)="showQuiz()"></p-button>
-          <p-button icon="pi pi-arrow-left" label="Folklore" *ngIf="showQuizTab" (onClick)="showFolklore()"></p-button>
+<!--          <p-button icon="pi pi-arrow-right" label="Quiz" *ngIf="!showQuizTab" (onClick)="showQuiz()"></p-button>-->
+<!--          <p-button icon="pi pi-arrow-left" label="Folklore" *ngIf="showQuizTab" (onClick)="showFolklore()"></p-button>-->
           <app-tab-folklore *ngIf="!showQuizTab"></app-tab-folklore>
           <app-quiz-tab-folklore *ngIf="showQuizTab"></app-quiz-tab-folklore>
         </div>

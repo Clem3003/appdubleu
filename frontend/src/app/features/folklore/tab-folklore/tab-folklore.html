@@ -2,9 +2,12 @@
   <div class="flex flex-row flex-wrap">
     @for (subject of folkloreSubjects; track subject.id) {
       <p-card class="m-2 w-full" [header]="subject.title">
-        <p class="m-0">
-          Lorem ipsum dolor sit amet...
-        </p>
+        <div class="flex flex-row justify-content-between gap-3">
+          <p-image [src]="subject.pictureUrl" alt="question.pictureUrl" width="100" [preview]="true" />
+          <i class="pi pi-file-plus text-2xl"></i>
+<!--          <i class="pi pi-expand text-2xl"></i>-->
+<!--          <i class="pi pi-external-link text-2xl"></i>-->
+        </div>
       </p-card>
     }
   </div>
