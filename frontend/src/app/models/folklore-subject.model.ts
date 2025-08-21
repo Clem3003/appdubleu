@@ -3,4 +3,5 @@ export interface FolkloreSubject {
   title: string;
   content: string;
   pictureUrl: string;
+  preview: string;
 }
