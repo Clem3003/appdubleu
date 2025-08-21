@@ -17,6 +17,7 @@ import {Ripple} from 'primeng/ripple';
 import {Badge} from 'primeng/badge';
 import {ContextMenu} from 'primeng/contextmenu';
 import {Divider} from 'primeng/divider';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -40,7 +41,8 @@ import {Divider} from 'primeng/divider';
     Badge,
     NgIf,
     ContextMenu,
-    Divider
+    Divider,
+    RouterLink
   ],
   templateUrl: './profile.html'
 })
@@ -59,32 +61,36 @@ export class Profile implements OnInit {
   protected products: Product[] = [{
         id: '1000',
         name: 'Wilmart Hélicie',
+        username: 'wilmart.helicie',
         image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png',
-        price: 65,
+        price: 200,
         category: 'Accessories',
         status: 'DUMB',
         rating: -5
       },{
         id: '1001',
         name: 'Matteo Wensel',
+        username: 'matteo.wensel',
         image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/elwinsharvill.png',
-        price: 65,
+        price: 1,
         category: 'Accessories',
         status: 'DUMB',
         rating: -5
       },{
         id: '1001',
         name: 'Fiacre Clara',
+        username: 'fiacre.clara',
         image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png',
-        price: 65,
+        price: 40,
         category: 'Accessories',
         status: 'DUMB',
         rating: -5
       },{
         id: '1001',
         name: 'Prince Louise',
+        username: 'prince.louise',
         image: 'https://primefaces.org/cdn/primeng/images/demo/avatar/annafali.png',
-        price: 65,
+        price: 70,
         category: 'Accessories',
         status: 'DUMB',
         rating: -5
@@ -112,7 +118,11 @@ export class Profile implements OnInit {
     }
   }
 
-  displayBleu() {
+  displayProduct() {
+    console.log("displayBleu");
+  }
 
+  deleteProduct() {
+    console.log("deleteBleu");
   }
 }
