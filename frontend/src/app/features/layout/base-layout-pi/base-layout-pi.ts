@@ -7,10 +7,6 @@ import {Menu} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {AuthService} from '../../../user/login/auth/auth.service';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {DashboardDemoDialog} from '../demo-dialogs/dashboard-demo-dialog/dashboard-demo-dialog';
-import {FolkloreDemoDialog} from '../demo-dialogs/folklore-demo-dialog/folklore-demo-dialog';
-import {MessageDemoDialog} from '../demo-dialogs/message-demo-dialog/message-demo-dialog';
-import {CompteDemoDialog} from '../demo-dialogs/compte-demo-dialog/compte-demo-dialog';
 import {DemoDialog} from '../demo-dialogs/demo-dialog/demo-dialog';
 
 @Component({

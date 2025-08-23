@@ -8,9 +8,8 @@ import {Carousel} from 'primeng/carousel';
 import {Tag} from 'primeng/tag';
 import {Button} from 'primeng/button';
 import {NgStyle} from '@angular/common';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../user/login/auth/auth.service';
-import {DashboardDemoDialog} from '../layout/demo-dialogs/dashboard-demo-dialog/dashboard-demo-dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -138,12 +137,5 @@ export class Dashboard implements OnInit {
   //       return 'danger';
   //   }
   // }
-  toggleDashboardDemoDialog() {
-      this.ref = this.dialogService.open(DashboardDemoDialog, {
-        header: 'Dashboard - Info',
-        width: '90vw',
-        height: '180vw',
-      });
-  }
 }
 
