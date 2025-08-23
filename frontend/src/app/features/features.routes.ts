@@ -24,7 +24,7 @@ const childrenRoutes: Routes = [
     { path: 'folklore-quiz', component: FolkloreQuiz },
     { path: 'forum', component: Forum },
     { path: 'profile', component: Profile },
-    { path: 'bleu-info', component: BleuInfo },
+    { path: 'bleu-info/:username' , component: BleuInfo },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },

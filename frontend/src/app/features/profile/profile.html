@@ -33,7 +33,7 @@
         <div class="flex flex-column mt-4">
           @for (product of products; let i = $index; track product.id){
             <div class="flex flex-row align-items-start justify-content-between">
-              <div class="flex flex-row align-items-center" [routerLink]="`/bleu-info${product.username}`" (click)="displayProduct()">
+              <div class="flex flex-row align-items-center" [routerLink]="`/bleu-info/${product.username}`" (click)="displayProduct()">
                 <p-avatar size="large" [image]="product.image" style="filter: grayscale(100%); transition: filter 0.3s ease-in-out;"
                           ></p-avatar>
                 <div class="flex flex-column m-1 mx-3">
