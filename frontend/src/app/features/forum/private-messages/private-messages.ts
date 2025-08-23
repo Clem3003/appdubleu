@@ -1,17 +1,32 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {PrivateMessageItem} from '../../../models/forum.model';
 import {Divider} from 'primeng/divider';
 import {Avatar} from 'primeng/avatar';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {InputIcon} from 'primeng/inputicon';
+import {IconField} from 'primeng/iconfield';
+import {InputText} from 'primeng/inputtext';
 
 @Component({
   selector: 'app-private-messages',
   imports: [
     Divider,
-    Avatar
+    Avatar,
+    FormsModule,
+    ReactiveFormsModule,
+    InputIcon,
+    IconField,
+    InputText
   ],
   templateUrl: './private-messages.html'
 })
 export class PrivateMessages {
+  protected fb = inject(FormBuilder);
+
+  protected form: FormGroup = this.fb.group({
+    search: this.fb.control('', null)
+  });
+
   protected privateMessages: PrivateMessageItem[] = [
     {
       id: 'msg-001',

@@ -8,7 +8,8 @@ import {Folklore} from './folklore/folklore';
 import {Forum} from './forum/forum';
 import {Profile} from './profile/profile';
 import {FolkloreQuiz} from './folklore-quiz/folklore-quiz';
-import {BleuInfo} from './profile/bleu-info/bleu-info';
+import {BleuInfo} from './account/bleu-info/bleu-info';
+import {Account} from './account/account';
 
 const defaultRoutes: Routes = [
   // { path: 'access-denied', component: ErrorComponent, data: { errorCode: 401 } },
@@ -23,8 +24,10 @@ const childrenRoutes: Routes = [
     { path: 'folklore', component: Folklore },
     { path: 'folklore-quiz', component: FolkloreQuiz },
     { path: 'forum', component: Forum },
-    { path: 'profile', component: Profile },
+    { path: 'account', component: Account },
     { path: 'bleu-info/:username' , component: BleuInfo },
+    { path: 'profile', component: Profile },
+    { path: 'settings', component: Profile },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },

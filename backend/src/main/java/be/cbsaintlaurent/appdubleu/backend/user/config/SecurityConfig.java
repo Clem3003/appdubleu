@@ -79,7 +79,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200", "https://demo-app.cbsaintlaurent.be", "https://cbsaintlaurent.be"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://192.168.0.165:4200", "https://demo-app.cbsaintlaurent.be", "https://cbsaintlaurent.be"));
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         configuration.setAllowCredentials(true); // pour envoyer le cookie JSESSIONID
         configuration.setAllowedHeaders(List.of("*"));

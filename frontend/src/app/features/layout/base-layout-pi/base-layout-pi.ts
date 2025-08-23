@@ -35,7 +35,8 @@ export class BaseLayoutPi implements  OnInit {
       items: [
         {
           label: 'Settings',
-          icon: 'pi pi-cog'
+          icon: 'pi pi-cog',
+          command: () => this.router.navigate(['/settings'], {queryParams: {}})
         },
         {
           label: 'Logout',
