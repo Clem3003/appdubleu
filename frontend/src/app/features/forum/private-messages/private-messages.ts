@@ -118,8 +118,9 @@ export class PrivateMessages implements OnInit {
 
   openConversation($event: AutoCompleteSelectEvent) {
     console.log("Ouvrir la conversation avec :", $event);
+    const user: StLoUser = $event.value;
 
-    // // Redirection vers la page de conversation (exemple)
-    // this.router.navigate(['/messages', user.id]);
+    // Redirection vers la page de conversation (exemple)
+    this.router.navigate(['/messages', user.id]);
   }
 }

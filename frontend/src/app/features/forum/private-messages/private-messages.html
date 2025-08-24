@@ -14,9 +14,7 @@
           [forceSelection]="true"
           [optionLabel]="getDisplayName"
           (onSelect)="openConversation($event)"
-          inputStyleClass="w-full"
-
-        >
+          inputStyleClass="w-full">
           <!-- Affichage dans la liste déroulante -->
           <ng-template let-user pTemplate="item">
             <p-avatar

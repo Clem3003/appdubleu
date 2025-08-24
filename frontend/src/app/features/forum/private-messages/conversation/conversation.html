@@ -1,0 +1,44 @@
+<div class="flex flex-column h-screen surface-ground">
+  <!-- Header -->
+  <div class="flex align-items-center justify-content-between p-3 border-bottom surface-card">
+    <div class="flex align-items-center">
+      <button pButton type="button" icon="pi pi-arrow-left" class="p-button-text mr-1" (click)="goBack()"></button>
+      <p-avatar [image]="user.avatarUrl"
+                size="large"
+                shape="circle" />
+      <div class="flex flex-column ml-2">
+        <span class="font-bold">{{ user.firstName }} {{ user.lastName }}</span>
+        <span class="text-sm text-color-secondary">@{{ user.nickname }}</span>
+      </div>
+    </div>
+    <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text" (click)="goBack()"></button>
+  </div>
+
+  <!-- bottom section -->
+  <div class="flex flex-column flex-grow-1 h-full pt-2 pb-4 h-5rem w-full bg-gray-50">
+    <!-- Messages -->
+    <div class="flex flex-column flex-grow p-3 overflow-auto" #messagesContainer>
+      <div *ngFor="let msg of messages" class="mb-2 flex"
+           [ngClass]="{'justify-content-end': msg.isMine, 'justify-content-start': !msg.isMine}">
+        <div class="inline-block border-round-md p-2 max-w-[75%]"
+             [ngClass]="{
+             'bg-primary text-white': msg.isMine,
+             'bg-gray-200': !msg.isMine
+           }">
+          {{ msg.text }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="flex p-3 border-top surface-card">
+      <input type="text" pInputText placeholder="Écrire un message..." [(ngModel)]="newMessage" (keydown.enter)="sendMessage()" class="flex-grow-1 mr-2">
+      <button pButton type="button" label="Envoyer" (click)="sendMessage()"></button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+
+</div>

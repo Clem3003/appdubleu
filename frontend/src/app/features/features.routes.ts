@@ -10,6 +10,7 @@ import {Profile} from './profile/profile';
 import {FolkloreQuiz} from './folklore-quiz/folklore-quiz';
 import {BleuInfo} from './account/bleu-info/bleu-info';
 import {Account} from './account/account';
+import {Conversation} from './forum/private-messages/conversation/conversation';
 
 const defaultRoutes: Routes = [
   // { path: 'access-denied', component: ErrorComponent, data: { errorCode: 401 } },
@@ -28,6 +29,7 @@ const childrenRoutes: Routes = [
     { path: 'bleu-info/:username' , component: BleuInfo },
     { path: 'profile', component: Profile },
     { path: 'settings', component: Profile },
+    { path: 'messages/:userid', component: Conversation },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },
