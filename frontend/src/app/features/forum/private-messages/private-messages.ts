@@ -8,8 +8,9 @@ import {IconField} from 'primeng/iconfield';
 import {InputText} from 'primeng/inputtext';
 import {StLoUser} from '../../../user/login/login.model';
 import {ForumManager} from '../forum.manager';
-import {AutoComplete, AutoCompleteCompleteEvent} from 'primeng/autocomplete';
+import {AutoComplete, AutoCompleteCompleteEvent, AutoCompleteSelectEvent} from 'primeng/autocomplete';
 import {PrimeTemplate} from 'primeng/api';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-private-messages',
@@ -27,7 +28,7 @@ import {PrimeTemplate} from 'primeng/api';
   templateUrl: './private-messages.html'
 })
 export class PrivateMessages implements OnInit {
-
+  private readonly router = inject(Router);
   protected fb = inject(FormBuilder);
   protected forumManager: ForumManager = inject(ForumManager);
 
@@ -113,5 +114,12 @@ export class PrivateMessages implements OnInit {
     return this.forumManager.allUsernames().map(user =>
       `${user.firstname} "${user.nickname}" ${user.lastname}`
     );
+  }
+
+  openConversation($event: AutoCompleteSelectEvent) {
+    console.log("Ouvrir la conversation avec :", $event);
+
+    // // Redirection vers la page de conversation (exemple)
+    // this.router.navigate(['/messages', user.id]);
   }
 }

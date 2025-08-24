@@ -8,11 +8,14 @@
         <p-auto-complete
           class="w-full"
           formControlName="search"
-          [suggestions]="getWSignalDisplayNames()"
+          [suggestions]="filteredUsernames"
           (completeMethod)="filterUsers($event)"
           placeholder="Recherche"
           [forceSelection]="true"
+          [optionLabel]="getDisplayName"
+          (onSelect)="openConversation($event)"
           inputStyleClass="w-full"
+
         >
           <!-- Affichage dans la liste déroulante -->
           <ng-template let-user pTemplate="item">
@@ -21,16 +24,12 @@
               shape="circle"
               size="normal">
             </p-avatar>
-            <span class="ml-2">
-              {{ user }}
-            </span>
+            <span class="ml-2">{{ getDisplayName(user) }}</span>
           </ng-template>
 
           <!-- Affichage dans l'input après sélection -->
-          <ng-template let-user pTemplate="selectedItem">
-            <span class="ml-2">
-              {{ user }}
-            </span>
+          <ng-template let-item="item" pTemplate="selectedItem">
+            <span class="ml-2">{{ getDisplayName(item) }}</span>
           </ng-template>
         </p-auto-complete>
         <p-inputicon class="pi pi-spinner pi-spin" />
