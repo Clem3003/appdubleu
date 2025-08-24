@@ -9,7 +9,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {InputText} from 'primeng/inputtext';
 import {RegisterManager} from '../register.manager';
 import {RegisterRequest} from '../register.model';
@@ -21,7 +21,8 @@ import {ButtonDirective} from "primeng/button";
     FormsModule,
     InputText,
     ReactiveFormsModule,
-    ButtonDirective
+    ButtonDirective,
+    RouterLink
   ],
   templateUrl: './register-form.html'
 })

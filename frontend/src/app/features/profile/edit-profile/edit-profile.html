@@ -1,0 +1,41 @@
+<div class="flex flex-column justify-content-center">
+
+  <h2 class="my-4 text-center">Edit Profile</h2>
+
+  <!-- Profile Card -->
+  <p-card class="border-round-2xl shadow-2 m-4">
+    <div class="flex flex-column">
+      <div class="flex flex-row md:flex-row align-items-start gap-4">
+        <p-avatar
+          [image]="'https://primefaces.org/cdn/primeng/images/demo/avatar/elwinsharvill.png'"
+          shape="circle"
+          size="xlarge"
+          style="width: 120px; height: 120px; font-size: 5rem;"
+        ></p-avatar>
+
+
+        <div class="flex-1 w-full">
+          <div class="flex flex-column md:flex-row md:align-items-center md:justify-content-between gap-3">
+            <div class="flex flex-column">
+              <div class="text-2xl font-semibold mt-4"><i class="pi pi-at font-semibold"></i>{{ 'user?.nickname' }}</div>
+              <div class=" text-color-secondary">{{ 'user?.baptismalYear' }}</div>
+              <div class="text-xs text-color-secondary">{{ 'user?.lastName' }}, {{ 'user?.firstName' }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-column ml-2 mt-4 md:flex-row align-items-start gap-2">
+        <div><i class="pi pi-language"></i><span class="ml-2">Français, Anglais</span></div>
+        <div><i class="pi pi-globe"></i><a [href]="'https://comitards.eu/fr/m/16210/Lemlijn_Cl%C3%A9ment'" target="_blank" class="ml-2">Comitard.eu<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+        <div><i class="pi pi-instagram"></i><a [href]="'user.instragramLink'" target="_blank" class="ml-2">Instagram<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+        <div><i class="pi pi-facebook"></i><a [href]="'user.facebookLink'" target="_blank" class="ml-2">Facebook<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+        <div><i class="pi pi-whatsapp"></i><a [href]="'user.whatsappLink'" target="_blank" class="ml-2">Whatsapp<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+        <div><i class="pi pi-inbox"></i><a [href]="'user.gmailLink'" target="_blank" class="ml-2">Gmail<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+        <div><i class="pi pi-paypal"></i><a [href]="'user.paypalLink'" target="_blank" class="ml-2">Paypal<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+        <div><img src="assets/ph-logo.jpg" alt="ph-logo" style="height: 16px; width: 16px; border: black 2px solid;" /><a [href]="'user.pornhubLink'" target="_blank" class="ml-2">Internet<i class="pi pi-external-link ml-1" style="font-size: 0.8rem"></i></a></div>
+      </div>
+    </div>
+  </p-card>
+</div>
+<div class="h-5rem"></div>

@@ -30,9 +30,19 @@ export class BaseLayoutPi implements  OnInit {
       label: 'Profile',
       items: [
         {
+          label: 'Profile',
+          icon: 'pi pi-user',
+          command: () => this.router.navigate(['/profile'], {queryParams: {}})
+        },
+        {
+          label: 'Edit profile',
+          icon: 'pi pi-user-edit',
+          command: () => this.router.navigate(['/profile/edit'], {queryParams: {}})
+        },
+        {
           label: 'Settings',
           icon: 'pi pi-cog',
-          command: () => this.router.navigate(['/settings'], {queryParams: {}})
+          command: () => this.router.navigate(['/profile'], {queryParams: {}})
         },
         {
           label: 'Logout',

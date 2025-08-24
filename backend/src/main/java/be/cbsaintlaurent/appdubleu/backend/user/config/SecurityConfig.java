@@ -67,6 +67,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/login", "/api/auth/register",
                                 "/api/auth/logout", "/api/auth/me", "/api/auth/ping", "/api/auth/version").permitAll()
+                        .requestMatchers("/api/user/all-usernames").authenticated()
                         .requestMatchers("/api/**").permitAll()
 //                        .requestMatchers("/api/**").authenticated()
                 )
