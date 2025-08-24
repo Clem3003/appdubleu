@@ -1,5 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {Router} from '@angular/router';
 import {InputText} from 'primeng/inputtext';
 import {RegisterManager} from '../register.manager';
@@ -27,15 +36,26 @@ export class RegisterForm implements OnInit {
   }
 
   private initForm(): void {
+    const today = new Date();
+    const defaultDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const defaultDateStr = defaultDate.toISOString().split('T')[0]; // format 'YYYY-MM-DD'
+
     this.form = this.fb.group({
       firstname: new FormControl('', Validators.required),
       lastname: new FormControl('', Validators.required),
       nickname: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      dateOfBirth: new FormControl('', Validators.required),
+      dateOfBirth: new FormControl(defaultDateStr, Validators.required),
       password: new FormControl('', Validators.required),
-    });
+      confirmPassword: new FormControl('', Validators.required)
+    }, { validators: this.passwordsMatchValidator });
   }
+
+  private passwordsMatchValidator: ValidatorFn = (group: AbstractControl) => {
+    const password = group.get('password')?.value;
+    const confirm = group.get('confirmPassword')?.value;
+    return password === confirm ? null : { passwordsMismatch: true };
+  };
 
   onSubmit(): void {
 

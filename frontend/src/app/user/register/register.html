@@ -1,1 +1,21 @@
-<app-register-form></app-register-form>
+<div class="relative flex items-center p-3 shadow-md" >
+  <img src="assets/logo-horizontal.png" alt="CB saint-laurent" class="w-8rem">
+</div>
+
+<p-card class="border-round-2xl shadow-2 bg-gray-50 m-4">
+  <div class="flex flex-column md:flex-row align-items-center gap-4">
+    <!--      <p-overlayBadge [value]="'user?.scoreDelta'" [severity]="(user?.scoreDelta ?? 0) >= 0 ? 'success' : 'danger'" class="inline-flex">-->
+    <!--      <p-overlayBadge [value]="'5'" [severity]="'warn'" class="inline-flex">-->
+    <p-avatar
+      [image]="'assets/logo.png'"
+      shape="circle"
+      size="xlarge"
+      class="shadow-1"
+      style="width: 160px; height: 160px; font-size: 5rem;"
+    ></p-avatar>
+
+    <app-register-form></app-register-form>
+  </div>
+</p-card>
+
+

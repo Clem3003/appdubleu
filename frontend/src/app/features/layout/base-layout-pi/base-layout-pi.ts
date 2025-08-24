@@ -79,7 +79,7 @@ export class BaseLayoutPi implements  OnInit {
     this.currentPage() === '/forum'
   );
   protected readonly profileSelected = computed(() =>
-    this.currentPage() === '/profile'
+    this.currentPage() === '/account'
   );
 
   protected readonly homeIconType = computed(() =>
