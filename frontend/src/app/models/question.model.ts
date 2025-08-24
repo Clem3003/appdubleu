@@ -1,4 +1,4 @@
-import {StLoUser} from '../user/login/login.model';
+import {SimplifiedStLoUser, StLoUser} from '../user/login/login.model';
 import {BaptismalSong} from './song.model';
 import {FolkloreSubject} from './folklore-subject.model';
 import {PennePins} from './pins.model';
@@ -19,7 +19,7 @@ export interface Question {
 
   correctAnswer: string;
 
-  createdBy: StLoUser;
+  createdBy: SimplifiedStLoUser;
   createdAt: string;
 }
 export interface QuestionAttemptResponse {
@@ -27,7 +27,7 @@ export interface QuestionAttemptResponse {
   attemptAnswer: string;
   success: boolean;
 
-  createdBy: StLoUser;
+  createdBy: SimplifiedStLoUser;
   createdAt: string;
 }
 export interface Answer {

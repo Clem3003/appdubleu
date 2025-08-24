@@ -7,3 +7,5 @@ databaseChangeLog:
       file: classpath:db/changelog/folklore_subject-schema.sql
   - include:
       file: classpath:db/changelog/question-schema.sql
+  - include:
+      file: classpath:db/changelog/message-schema.sql

@@ -3,11 +3,17 @@ export interface UserCredentials {
   username: string;
   password: string;
 }
+export interface SimplifiedStLoUser {
+  id: string;
+  username: string;
+  avatarUrl?: string;
+}
 export interface StLoUser {
   id: string;
   username: string;
-  nickname?: string;
+  nickname: string;
   role?: string;
-  fullname?: string;
+  lastname: string;
+  firstname: string;
   avatarUrl?: string;
 }

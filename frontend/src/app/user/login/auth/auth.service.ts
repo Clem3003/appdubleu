@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   // private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : switch dev/prod
-  private readonly API_URL = 'http://192.168.0.165:8080/api/auth'; // TODO : switch dev/prod
+  private readonly API_URL = 'http://192.168.68.65:8080/api/auth'; // TODO : switch dev/prod
   private router: Router = inject(Router);
 
   constructor(private http: HttpClient) {}

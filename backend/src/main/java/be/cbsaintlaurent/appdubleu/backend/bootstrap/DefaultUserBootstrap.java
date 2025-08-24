@@ -3,6 +3,7 @@ package be.cbsaintlaurent.appdubleu.backend.bootstrap;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
 import be.cbsaintlaurent.appdubleu.backend.user.service.AuthService;
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ public class DefaultUserBootstrap {
     private final AuthService authService;
 //    private final ApplicationProperties appProperties;
 
-//    @PostConstruct
+    @PostConstruct
     public void initDefaultUsers() {
 //        log.info("Bootstrap default users for environment: {}"/*, appProperties.getEnvironment()*/);
 

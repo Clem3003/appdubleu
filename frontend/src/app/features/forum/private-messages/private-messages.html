@@ -4,7 +4,35 @@
   <form [formGroup]="form" class="my-4">
       <p-iconfield class="w-full">
         <p-inputicon class="pi pi-search" />
-        <input type="text" pInputText id="search" class="w-full" placeholder="Recherche" />
+<!--        <input type="text" pInputText id="search" class="w-full" placeholder="Recherche" />-->
+        <p-auto-complete
+          class="w-full"
+          formControlName="search"
+          [suggestions]="getWSignalDisplayNames()"
+          (completeMethod)="filterUsers($event)"
+          placeholder="Recherche"
+          [forceSelection]="true"
+          inputStyleClass="w-full"
+        >
+          <!-- Affichage dans la liste déroulante -->
+          <ng-template let-user pTemplate="item">
+            <p-avatar
+              [image]="'https://primefaces.org/cdn/primeng/images/demo/avatar/elwinsharvill.png'"
+              shape="circle"
+              size="normal">
+            </p-avatar>
+            <span class="ml-2">
+              {{ user }}
+            </span>
+          </ng-template>
+
+          <!-- Affichage dans l'input après sélection -->
+          <ng-template let-user pTemplate="selectedItem">
+            <span class="ml-2">
+              {{ user }}
+            </span>
+          </ng-template>
+        </p-auto-complete>
         <p-inputicon class="pi pi-spinner pi-spin" />
       </p-iconfield>
   </form>

@@ -1,15 +1,15 @@
-import {StLoUser} from '../user/login/login.model';
+import {SimplifiedStLoUser, StLoUser} from '../user/login/login.model';
 
 export interface PrivateMessageItem {
   id: string;
 
-  recipient: StLoUser;
+  recipient: SimplifiedStLoUser;
   isActive: boolean;
 
   idRead: boolean;
 
   lastUpdate: Date;
 
-  createdBy: StLoUser;
+  createdBy: SimplifiedStLoUser;
   createdAt: string;
 }

@@ -1,18 +1,13 @@
 package be.cbsaintlaurent.appdubleu.backend.user.service;
 
-import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
-import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
-import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
-import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
+import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
+import be.cbsaintlaurent.appdubleu.backend.user.mapper.StLoUserMapper;
 import be.cbsaintlaurent.appdubleu.backend.user.repository.StLoUserRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +15,12 @@ import java.time.LocalDate;
 public class StLoUserService {
 
     private final StLoUserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final StLoUserMapper userMapper;
+
+    public List<StLoUser> getAllUsernames() {
+        var response = userRepository.findAll();
+        return userMapper.toUsernameOnlyDtoList(response);
+    }
 
     // TODO : retrieve/ edit profile
     // TODO : List user

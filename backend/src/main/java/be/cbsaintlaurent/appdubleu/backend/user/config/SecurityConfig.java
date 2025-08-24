@@ -65,8 +65,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/me", "/api/auth/ping", "/api/auth/version").permitAll()
-                        .requestMatchers("/api/**").authenticated()
+                        .requestMatchers("/api/auth/login", "/api/auth/register",
+                                "/api/auth/logout", "/api/auth/me", "/api/auth/ping", "/api/auth/version").permitAll()
+                        .requestMatchers("/api/**").permitAll()
+//                        .requestMatchers("/api/**").authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
                 .formLogin(login -> login.disable())
@@ -79,7 +81,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://192.168.0.165:4200", "https://demo-app.cbsaintlaurent.be", "https://cbsaintlaurent.be"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://192.168.68.65:4200", "https://demo-app.cbsaintlaurent.be", "https://cbsaintlaurent.be"));
         configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         configuration.setAllowCredentials(true); // pour envoyer le cookie JSESSIONID
         configuration.setAllowedHeaders(List.of("*"));

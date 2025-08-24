@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit, WritableSignal} from '@angular/core';
 import {PrivateMessageItem} from '../../../models/forum.model';
 import {Divider} from 'primeng/divider';
 import {Avatar} from 'primeng/avatar';
@@ -6,6 +6,10 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 import {InputIcon} from 'primeng/inputicon';
 import {IconField} from 'primeng/iconfield';
 import {InputText} from 'primeng/inputtext';
+import {StLoUser} from '../../../user/login/login.model';
+import {ForumManager} from '../forum.manager';
+import {AutoComplete, AutoCompleteCompleteEvent} from 'primeng/autocomplete';
+import {PrimeTemplate} from 'primeng/api';
 
 @Component({
   selector: 'app-private-messages',
@@ -16,16 +20,27 @@ import {InputText} from 'primeng/inputtext';
     ReactiveFormsModule,
     InputIcon,
     IconField,
-    InputText
+    InputText,
+    AutoComplete,
+    PrimeTemplate
   ],
   templateUrl: './private-messages.html'
 })
-export class PrivateMessages {
+export class PrivateMessages implements OnInit {
+
   protected fb = inject(FormBuilder);
+  protected forumManager: ForumManager = inject(ForumManager);
 
   protected form: FormGroup = this.fb.group({
     search: this.fb.control('', null)
   });
+
+
+  ngOnInit() {
+    console.log("test");
+
+    console.log(this.forumManager.allUsernames());
+  }
 
   protected privateMessages: PrivateMessageItem[] = [
     {
@@ -78,4 +93,25 @@ export class PrivateMessages {
     }
   ];
 
+  showSuggestions() {
+    console.log(this.forumManager.allUsernames());
+  }
+
+  filteredUsernames: StLoUser[] = [];
+
+  filterUsers(event: any) {
+    const query = event.query.toLowerCase();
+    this.filteredUsernames = this.forumManager.allUsernames().filter(user =>
+      this.getDisplayName(user).toLowerCase().includes(query)
+    );
+  }
+
+  getDisplayName(user: StLoUser): string {
+    return `${user.firstname} "${user.nickname}" ${user.lastname}`;
+  }
+  getWSignalDisplayNames(): string[] {
+    return this.forumManager.allUsernames().map(user =>
+      `${user.firstname} "${user.nickname}" ${user.lastname}`
+    );
+  }
 }
