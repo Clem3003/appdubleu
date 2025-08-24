@@ -34,7 +34,7 @@ export class LoginForm implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.form = this.fb.group({
-      username: new FormControl('', Validators.required),
+      username: new FormControl(null, Validators.required),
       password: new FormControl('', Validators.required),
     });
   }

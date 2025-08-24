@@ -37,7 +37,7 @@ export class RegisterForm implements OnInit {
 
   private initForm(): void {
     const today = new Date();
-    const defaultDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const defaultDate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
     const defaultDateStr = defaultDate.toISOString().split('T')[0]; // format 'YYYY-MM-DD'
 
     this.form = this.fb.group({
@@ -48,13 +48,30 @@ export class RegisterForm implements OnInit {
       dateOfBirth: new FormControl(defaultDateStr, Validators.required),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required)
-    }, { validators: this.passwordsMatchValidator });
+    }, { validators: [this.passwordsMatchValidator, this.agedEnoughValidator] });
   }
 
   private passwordsMatchValidator: ValidatorFn = (group: AbstractControl) => {
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;
     return password === confirm ? null : { passwordsMismatch: true };
+  };
+
+  private agedEnoughValidator: ValidatorFn = (group: AbstractControl) => {
+    const dob = group.get('dateOfBirth')?.value;
+    if (!dob) return null;
+
+    const birthDate = new Date(dob);
+    const today = new Date();
+
+    // Calcul de l'âge
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age >= 17 ? null : { tooYoung: true };
   };
 
   onSubmit(): void {
