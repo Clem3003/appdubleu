@@ -45,6 +45,11 @@ export class BaseLayoutPi implements  OnInit {
           command: () => this.router.navigate(['/profile'], {queryParams: {}})
         },
         {
+          label: 'Me',
+          icon: 'pi pi-globe',
+          command: () => this.authService.me().subscribe()
+        },
+        {
           label: 'Logout',
           icon: 'pi pi-sign-out',
           command: () => this.authService.logout().subscribe()

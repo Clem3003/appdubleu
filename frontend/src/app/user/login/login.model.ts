@@ -12,6 +12,8 @@ export interface StLoUser {
   id: string;
   username: string;
   nickname: string;
+  email?: string;
+  dateOfBirth?: string;
   role?: string;
   lastname: string;
   firstname: string;

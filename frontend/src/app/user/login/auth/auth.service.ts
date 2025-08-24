@@ -8,10 +8,16 @@ import {Router} from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   // private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : switch dev/prod
-  private readonly API_URL = 'http://192.168.68.65:8080/api/auth'; // TODO : switch dev/prod
+  // private readonly API_URL = 'http://192.168.68.65:4200/api/auth'; // TODO : switch dev/prod
+  // private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
+  private readonly API_URL = 'http://192.168.68.65:4200/api/auth'; // TODO : switch dev/prod
   private router: Router = inject(Router);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.me().subscribe((data: any) => {
+      this.currentUser.set(data);
+    });
+  }
 
   public currentUser: WritableSignal<StLoUser | null> = signal<StLoUser | null>(null);
 
@@ -22,6 +28,8 @@ export class AuthService {
       { withCredentials: true } // ✅ indispensable pour gérer JSESSIONID
     ).pipe(
       tap((user: any) => {
+        console.log("user");
+        console.log(user);
         this.currentUser.set(user); // ← on sauvegarde l'utilisateur
       })
     );
@@ -43,10 +51,7 @@ export class AuthService {
   }
 
   me(): Observable<StLoUser | null> {
-    if (this.currentUser()) {
-      return of(this.currentUser());
-    }
-    return this.http.get<StLoUser>(`${this.API_URL}/me`); // sinon, requête vers le serveur
+    return this.http.get<StLoUser>(`${this.API_URL}/me`, { withCredentials: true });
   }
 
   register(request: RegisterRequest) {

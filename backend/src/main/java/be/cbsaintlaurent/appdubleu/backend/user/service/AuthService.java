@@ -65,6 +65,8 @@ public class AuthService {
                 HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
                 SecurityContextHolder.getContext()
         );
+
+        System.out.println("Connecté avec succès : " + user.getUsername() + ", auth principal:" + authentication.getPrincipal() + ", auth name:" + authentication.getName());
     }
 
     public void clearAuthentication(HttpServletRequest request) {

@@ -5,25 +5,137 @@
   <!-- Profile Card -->
   <p-card class="border-round-2xl shadow-2 m-4">
     <div class="flex flex-column">
-      <div class="flex flex-row md:flex-row align-items-start gap-4">
+      <div class="flex align-items-center gap-4">
         <p-avatar
           [image]="'https://primefaces.org/cdn/primeng/images/demo/avatar/elwinsharvill.png'"
           shape="circle"
           size="xlarge"
           style="width: 120px; height: 120px; font-size: 5rem;"
         ></p-avatar>
-
-
-        <div class="flex-1 w-full">
-          <div class="flex flex-column md:flex-row md:align-items-center md:justify-content-between gap-3">
-            <div class="flex flex-column">
-              <div class="text-2xl font-semibold mt-4"><i class="pi pi-at font-semibold"></i>{{ 'user?.nickname' }}</div>
-              <div class=" text-color-secondary">{{ 'user?.baptismalYear' }}</div>
-              <div class="text-xs text-color-secondary">{{ 'user?.lastName' }}, {{ 'user?.firstName' }}</div>
-            </div>
-          </div>
-        </div>
       </div>
+      <h3 class="mt-4 mb-2 text-2xl">Profile </h3>
+
+      <form [formGroup]="form" class="container-fluid">
+        <section class="row justify-content-center">
+          <section class="col-12">
+            <div class="form-container pb-4">
+              <div class="form-group">
+                <label for="username">Prénom</label>
+                <input
+                  formControlName="firstname"
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Votre prénom"
+                  required
+                  autofocus
+                  pInputText
+                />
+                <!-- <val-errors controlName="username" /> -->
+              </div>
+
+              <div class="form-group">
+                <label for="username">Nom</label>
+                <input
+                  formControlName="lastname"
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Votre nom"
+                  required
+                  autofocus
+                  pInputText
+                />
+                <!-- <val-errors controlName="username" /> -->
+              </div>
+
+              <div class="form-group">
+                <label for="username">Surnom</label>
+                <input
+                  formControlName="nickname"
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Surnom de guindaille"
+                  required
+                  autofocus
+                  pInputText
+                />
+                <!-- <val-errors controlName="username" /> -->
+              </div>
+
+              <div class="form-group">
+                <label for="username">Email</label>
+                <input
+                  formControlName="email"
+                  id="username"
+                  type="text"
+                  class="form-control"
+                  placeholder="Votre addresse email"
+                  required
+                  autofocus
+                  pInputText
+                />
+                <!-- <val-errors controlName="username" /> -->
+              </div>
+
+              <div class="form-group">
+                <label for="username">Date de naissance</label>
+                <input
+                  formControlName="dateOfBirth"
+                  id="username"
+                  type="date"
+                  class="form-control"
+                  required
+                  autofocus
+                  pInputText
+                />
+                <!-- <val-errors controlName="username" /> -->
+              </div>
+
+              <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input
+                  formControlName="password"
+                  id="password"
+                  type="password"
+                  class="form-control"
+                  placeholder="Mot de passe"
+                  autocomplete="off"
+                  required
+                />
+                <!-- <val-errors controlName="password" /> -->
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">Confirme ton mot de passe</label>
+                <input
+                  formControlName="confirmPassword"
+                  id="confirmPassword"
+                  type="password"
+                  class="form-control"
+                  placeholder="Confirmation mdp"
+                  autocomplete="off"
+                  required
+                />
+                <!-- <val-errors controlName="password" /> -->
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                [disabled]="form.invalid"
+                (click)="onSubmit()"
+                pButton
+                icon="pi pi-sign-in">
+                Modifier
+              </button>
+            </div>
+          </section>
+        </section>
+      </form>
+
+      <h3 class="mt-4 mb-2 text-2xl">External links </h3>
 
       <div class="flex flex-column ml-2 mt-4 md:flex-row align-items-start gap-2">
         <div><i class="pi pi-language"></i><span class="ml-2">Français, Anglais</span></div>
