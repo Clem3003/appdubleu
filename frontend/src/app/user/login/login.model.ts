@@ -8,6 +8,14 @@ export interface SimplifiedStLoUser {
   username: string;
   avatarUrl?: string;
 }
+
+export interface StLoBleu {
+  id: string;
+  username: string;
+  nickname: string;
+  lastname: string;
+}
+
 export interface StLoUser {
   id: string;
   username: string;

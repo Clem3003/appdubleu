@@ -10,6 +10,9 @@ import {Button} from 'primeng/button';
 import {NgStyle} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from '../../user/login/auth/auth.service';
+import {Avatar} from 'primeng/avatar';
+import {Divider} from 'primeng/divider';
+import {StLoBleu, StLoUser} from '../../user/login/login.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +24,9 @@ import {AuthService} from '../../user/login/auth/auth.service';
     Carousel,
     Tag,
     Button,
-    NgStyle
+    NgStyle,
+    Avatar,
+    Divider
   ],
   templateUrl: './dashboard.html',
 })
@@ -41,6 +46,36 @@ export class Dashboard implements OnInit {
     });
   }
 
+  protected bests: StLoBleu[] = [
+
+  ]
+
+  protected targets: StLoBleu[] = [
+    {
+      id: '',
+      username: 'wensel.matthéo',
+      lastname: 'Wensel',
+      nickname: ''
+    },
+    {
+      id: '',
+      username: '',
+      lastname: 'Wilmart',
+      nickname: ''
+    },
+    {
+      id: '',
+      username: '',
+      lastname: 'Fiacre',
+      nickname: ''
+    },
+    {
+      id: '',
+      username: '',
+      lastname: 'Nickles',
+      nickname: ''
+    },
+  ]
   protected products: any[] = [
     {
       id: '1000',
