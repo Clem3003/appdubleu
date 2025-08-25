@@ -18,7 +18,7 @@ public class BaptismalSeason {
     private Year startYear;
     private Year endYear;
 
-    private String Title; // "Season 24-25"
+    private String title; // "Season 24-25"
 
     private String pictureUrl; // Photo du comité avec penne et tête qui regarde par terre
 

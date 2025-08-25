@@ -33,6 +33,11 @@ public class BaptismalSeasonService {
     private final StLoUserMapper userMapper;
 
     @Transactional
+    public boolean existsBySeasonTitle(String title) {
+        return repository.existsByTitle(title);
+    }
+
+    @Transactional
     public BaptismalSeason newSeason(NewBaptismalSeasonRequest request) {
         // Récupère l'utilisateur connecté (entité gérée par Hibernate)
         StLoUserEntity userEntity = userRepository

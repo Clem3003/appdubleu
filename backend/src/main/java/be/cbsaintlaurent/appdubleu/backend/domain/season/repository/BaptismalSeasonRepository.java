@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface BaptismalSeasonRepository extends JpaRepository<BaptismalSeasonEntity, BaptismalSeason> {
 
     BaptismalSeasonEntity findFirstByActive(boolean active);
+
+    boolean existsByTitle(String title);
 }
 
