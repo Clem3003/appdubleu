@@ -16,7 +16,7 @@ import java.util.UUID;
 public class FolkloreSubject {
     private UUID id;
 
-    private String Title;
+    private String title;
     private String content;
     private String pictureUrl;
 

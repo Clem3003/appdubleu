@@ -74,5 +74,9 @@ public class FolkloreSubjectService {
         var response = repository.save(folkloreSubjectEntity);
         return ResponseEntity.ok(mapper.toDto(response));
     }
+
+    public boolean existsBySubjectTitle(String title) {
+        return repository.existsByTitle(title);
+    }
 }
 

@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class NewFolkloreSubjectRequest {
 
-    private String Title;
+    private String title;
     private String content;
     private String pictureUrl;
 }

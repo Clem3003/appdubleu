@@ -19,7 +19,7 @@ public class FolkloreSubjectEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String Title;
+    private String title;
     private String content;
     private String pictureUrl;
 
