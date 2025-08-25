@@ -33,10 +33,15 @@ public class StLoUserEntity implements UserDetails {
     private String email;
     private String password;
 
-
     @Enumerated(EnumType.STRING)
     private StLoRole role;
 
+    @OneToMany
+    private List<StLoUserEntity> contacts;
+
+    private boolean isPublic;
+
+    private boolean deleted;
     private boolean active;
     private LocalDate registerDate;
     private String profilePictureUrl;

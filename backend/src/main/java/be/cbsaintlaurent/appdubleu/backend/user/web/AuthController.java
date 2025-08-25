@@ -8,6 +8,7 @@ import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
 import be.cbsaintlaurent.appdubleu.backend.user.exception.BadCredentialsException;
 import be.cbsaintlaurent.appdubleu.backend.user.exception.UserDisabledException;
 import be.cbsaintlaurent.appdubleu.backend.user.service.AuthService;
+import be.cbsaintlaurent.appdubleu.backend.user.service.StLoUserLogService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +33,7 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
+    private final StLoUserLogService logService;
 
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
@@ -42,6 +44,8 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<StLoUser> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         StLoUserEntity user = authService.authenticate(request.username(), request.password());
+
+        logService.log(user, "LOGIN", user.getUsername() + " s'est connecté");
         authService.setAuthentication(user, httpRequest);
 
         return ResponseEntity.ok(authService.getCurrentUser());

@@ -7,7 +7,7 @@ import {StLoUser} from '../../user/login/login.model';
 @Injectable({ providedIn: 'root' })
 export class ForumService {
   // private readonly API_URL = 'http://localhost:8080/api/forum'; // TODO : switch dev/prod
-  private readonly API_URL = 'http://192.168.68.65:4200/api/forum'; // TODO : switch dev/prod
+  private readonly API_URL = 'http://192.168.68.70:4200/api/forum'; // TODO : switch dev/prod
   private router: Router = inject(Router);
 
   constructor(private http: HttpClient) {}

@@ -6,7 +6,8 @@ import {AuthGuard} from './user/login/auth/AuthGuard';
 import {Register} from './user/register/register';
 
 export const routes: Routes = [
-  { path: 'login', component: Login,  canActivate: [RedirectLoginGuard] },
+  { path: 'login', component: Login },
+  // { path: 'login', component: Login,  canActivate: [RedirectLoginGuard] },
   { path: 'register', component: Register },
   { path: '', children: FEATURES_ROUTES }
   // { path: '', children: FEATURES_ROUTES, canActivate: [AuthGuard] }

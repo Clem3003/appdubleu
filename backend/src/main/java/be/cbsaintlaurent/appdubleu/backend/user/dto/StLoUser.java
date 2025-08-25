@@ -1,9 +1,11 @@
 package be.cbsaintlaurent.appdubleu.backend.user.dto;
 
+import be.cbsaintlaurent.appdubleu.backend.user.entity.StLoUserEntity;
 import be.cbsaintlaurent.appdubleu.backend.user.enums.StLoRole;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -21,6 +23,11 @@ public class StLoUser {
 
     private StLoRole role;
 
+    private List<StLoUserEntity> contacts;
+
+    private boolean isPublic;
+
+    private boolean deleted;
     private boolean active;
     private LocalDate registerDate;
     private String profilePictureUrl;
