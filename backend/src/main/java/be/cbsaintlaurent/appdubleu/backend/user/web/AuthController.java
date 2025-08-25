@@ -45,13 +45,15 @@ public class AuthController {
 
     @LoggableAction(value = "LOGIN", description = "Connexion utilisateur")
     @PostMapping("/login")
-    public ResponseEntity<StLoUser> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
-        StLoUserEntity user = authService.authenticate(request.username(), request.password());
-
-//        logService.log(user, "LOGIN", user.getUsername() + " s'est connecté");
-        authService.setAuthentication(user, httpRequest);
-
-        return ResponseEntity.ok(authService.getCurrentUser());
+    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
+        try {
+            StLoUserEntity user = authService.authenticate(request.username(), request.password());
+            authService.setAuthentication(user, httpRequest);
+            return ResponseEntity.ok(authService.getCurrentUser());
+        } catch (BadCredentialsException | UserDisabledException ex) {
+            System.out.println("exception");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", ex.getMessage()));
+        }
     }
 
 //    @PostMapping("/logout")
@@ -60,6 +62,7 @@ public class AuthController {
 //        return ResponseEntity.ok(Map.of("message", "Logout successful"));
 //    }
 
+    @LoggableAction(value = "LOGOUT", description = "Logout utilisateur")
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpServletRequest httpRequest) {
         authService.clearAuthentication(httpRequest);
@@ -75,6 +78,7 @@ public class AuthController {
 //        return ResponseEntity.ok(currentUser);
 //    }
 
+    @LoggableAction(value = "ME", description = "Check de connexion")
     @GetMapping("/me")
     public ResponseEntity<StLoUser> me() {
         StLoUser user = authService.getCurrentUser();
@@ -84,6 +88,7 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
+    @LoggableAction(value = "REGISTER", description = "Inscription utilisateur") // TODO : handle without user exception
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         return authService.register(request);

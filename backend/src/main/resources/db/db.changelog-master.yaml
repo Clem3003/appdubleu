@@ -11,3 +11,5 @@ databaseChangeLog:
       file: classpath:db/changelog/message-schema.sql
   - include:
       file: classpath:db/changelog/log-schema.sql
+  - include:
+      file: classpath:db/changelog/st_lo_application_properties-schema.sql

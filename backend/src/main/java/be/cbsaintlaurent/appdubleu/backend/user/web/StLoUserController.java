@@ -1,5 +1,6 @@
 package be.cbsaintlaurent.appdubleu.backend.user.web;
 
+import be.cbsaintlaurent.appdubleu.backend.user.annotation.LoggableAction;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
 import be.cbsaintlaurent.appdubleu.backend.user.service.StLoUserService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class StLoUserController {
 
     private final StLoUserService service;
 
+    @LoggableAction(value = "GET_USERNAMES", description = "Récupère les noms d'utilisateurs")
     @GetMapping("/all-usernames")
     public ResponseEntity<List<StLoUser>> getActiveQuestion() {
         List<StLoUser> response = service.getAllUsernames();
