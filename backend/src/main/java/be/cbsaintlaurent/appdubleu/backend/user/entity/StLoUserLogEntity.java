@@ -25,6 +25,8 @@ public class StLoUserLogEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private StLoUserEntity user;
 
+    private String username; // Uniquement que ça soit plus lisible en base de donnée
+
     @Column(nullable = false)
     private String action; // ex: "LOGIN", "COMPLETE_TEST", "UPDATE_PROFILE"
 

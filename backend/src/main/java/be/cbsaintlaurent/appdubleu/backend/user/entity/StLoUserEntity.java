@@ -37,6 +37,11 @@ public class StLoUserEntity implements UserDetails {
     private StLoRole role;
 
     @OneToMany
+    @JoinTable(
+        name = "st_lo_user_contacts_entity",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "contact_id")
+    )
     private List<StLoUserEntity> contacts;
 
     private boolean isPublic;

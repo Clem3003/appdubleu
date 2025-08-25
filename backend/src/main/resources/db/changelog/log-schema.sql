@@ -5,6 +5,7 @@
 CREATE TABLE st_lo_user_log (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID NOT NULL,
+    username VARCHAR(255) NOT NULL,
     action VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),

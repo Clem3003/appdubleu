@@ -1,5 +1,6 @@
 package be.cbsaintlaurent.appdubleu.backend.user.web;
 
+import be.cbsaintlaurent.appdubleu.backend.user.annotation.LoggableAction;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.LoginRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.RegisterRequest;
 import be.cbsaintlaurent.appdubleu.backend.user.dto.StLoUser;
@@ -41,11 +42,13 @@ public class AuthController {
 //        authService.setAuthentication(user, httpRequest);
 //        return ResponseEntity.ok(Map.of("message", "Login successful"));
 //    }
+
+    @LoggableAction(value = "LOGIN", description = "Connexion utilisateur")
     @PostMapping("/login")
     public ResponseEntity<StLoUser> login(@RequestBody LoginRequest request, HttpServletRequest httpRequest) {
         StLoUserEntity user = authService.authenticate(request.username(), request.password());
 
-        logService.log(user, "LOGIN", user.getUsername() + " s'est connecté");
+//        logService.log(user, "LOGIN", user.getUsername() + " s'est connecté");
         authService.setAuthentication(user, httpRequest);
 
         return ResponseEntity.ok(authService.getCurrentUser());

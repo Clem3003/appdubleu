@@ -21,7 +21,7 @@
 
  --changeset user-schema:4
 -- Table de jointure pour représenter la liste de contacts
- CREATE TABLE st_lo_user_contacts (
+ CREATE TABLE st_lo_user_contacts_entity (
     user_id UUID NOT NULL,
     contact_id UUID NOT NULL,
     PRIMARY KEY (user_id, contact_id),
