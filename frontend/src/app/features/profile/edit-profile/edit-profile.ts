@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, computed, effect, inject, OnInit, Signal, signal, WritableSignal} from '@angular/core';
 import {Avatar} from 'primeng/avatar';
 import {Card} from 'primeng/card';
 import {ButtonDirective} from 'primeng/button';
@@ -48,7 +48,6 @@ export class EditProfile implements  OnInit {
         this.initForm(user);
       }
     });
-
   }
 
   ngOnInit() {

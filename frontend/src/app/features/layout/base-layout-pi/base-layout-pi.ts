@@ -39,11 +39,11 @@ export class BaseLayoutPi implements  OnInit {
           icon: 'pi pi-user-edit',
           command: () => this.router.navigate(['/profile/edit'], {queryParams: {}})
         },
-        {
-          label: 'Settings',
-          icon: 'pi pi-cog',
-          command: () => this.router.navigate(['/profile'], {queryParams: {}})
-        },
+        // {
+        //   label: 'Settings',
+        //   icon: 'pi pi-cog',
+        //   command: () => this.router.navigate(['/profile'], {queryParams: {}})
+        // },
         {
           label: 'Me',
           icon: 'pi pi-globe',
@@ -61,7 +61,8 @@ export class BaseLayoutPi implements  OnInit {
       items: [
         {
           label: 'Infos',
-          icon: 'pi pi-info-circle'
+          icon: 'pi pi-info-circle',
+          command: () => this.router.navigate(['/infos'], {queryParams: {}})
         }
       ]
     }
@@ -115,7 +116,7 @@ export class BaseLayoutPi implements  OnInit {
 
   toggleDemoDialog() {
     this.ref = this.dialogService.open(DemoDialog, {
-          header: 'Demo - Info',
+          header: 'Demo - Info \n 🚧 Work in progress 🚧',
           width: '90vw',
           height: '180vw',
         });

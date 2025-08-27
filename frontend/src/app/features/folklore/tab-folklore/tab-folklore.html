@@ -11,7 +11,9 @@
         <ng-template #footer>
           <div class="flex flex-row justify-content-end gap-4 mt-1">
 <!--            <p-button label="Cancel" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full" />-->
-            <p-button label="Quiz" class="col-6" styleClass="w-full" />
+            @if (subject.title == "Tchantches"){
+              <p-button label="Quiz" class="col-6" styleClass="w-full" [routerLink]="'/folklore-quiz'"/>
+            }
           </div>
         </ng-template>
       </p-card>
