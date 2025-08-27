@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, WritableSignal} from '@angular/core';
+import {Component, effect, inject, OnInit, WritableSignal} from '@angular/core';
 import {Avatar} from 'primeng/avatar';
 import {Card} from 'primeng/card';
 import {ButtonDirective} from 'primeng/button';
@@ -38,26 +38,37 @@ export class EditProfile implements  OnInit {
   private readonly router = inject(Router);
 
   private user: WritableSignal<StLoUser | null> = this.authService.currentUser;
+  protected loading: boolean = true;
 
-  ngOnInit() {
-    console.log(this.user());
-    this.initForm();
+
+  constructor() {
+    effect(() => {
+      const user = this.user();
+      if (user) {
+        this.initForm(user);
+      }
+    });
+
   }
 
-  private initForm(): void {
+  ngOnInit() {
+  }
+
+  private initForm(user: StLoUser): void {
     const today = new Date();
     const defaultDate = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
     const defaultDateStr = defaultDate.toISOString().split('T')[0]; // format 'YYYY-MM-DD'
 
     this.form = this.fb.group({
-      firstname: new FormControl(this.user()?.firstname, Validators.required),
-      lastname: new FormControl(this.user()?.lastname, Validators.required),
-      nickname: new FormControl(this.user()?.nickname, Validators.required),
-      email: new FormControl(this.user()?.email, Validators.required),
-      dateOfBirth: new FormControl(this.user()?.dateOfBirth, Validators.required),
+      firstname: new FormControl(user.firstname, Validators.required),
+      lastname: new FormControl(user.lastname, Validators.required),
+      nickname: new FormControl(user.nickname, Validators.required),
+      email: new FormControl(user.email, Validators.required),
+      dateOfBirth: new FormControl(user.dateOfBirth, Validators.required),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required)
     }, { validators: [this.passwordsMatchValidator] });
+    this.loading = false;
   }
 
   private passwordsMatchValidator: ValidatorFn = (group: AbstractControl) => {

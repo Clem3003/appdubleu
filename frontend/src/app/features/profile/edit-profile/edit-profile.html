@@ -14,8 +14,8 @@
         ></p-avatar>
       </div>
       <h3 class="mt-4 mb-2 text-2xl">Profile </h3>
-
-      <form [formGroup]="form" class="container-fluid">
+      @if (!loading) {
+        <form [formGroup]="form" class="container-fluid">
         <section class="row justify-content-center">
           <section class="col-12">
             <div class="form-container pb-4">
@@ -134,7 +134,7 @@
           </section>
         </section>
       </form>
-
+      }
       <h3 class="mt-4 mb-2 text-2xl">External links </h3>
 
       <div class="flex flex-column ml-2 mt-4 md:flex-row align-items-start gap-2">
