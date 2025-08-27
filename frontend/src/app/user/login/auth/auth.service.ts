@@ -8,9 +8,9 @@ import {Router} from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   // private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : switch dev/prod
-  // private readonly API_URL = 'http://192.168.68.70:4200/api/auth'; // TODO : switch dev/prod
   // private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
-  private readonly API_URL = 'http://192.168.68.70:4200/api/auth'; // TODO : switch dev/prod
+  // private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
+  private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
   private router: Router = inject(Router);
 
   constructor(private http: HttpClient) {
@@ -24,8 +24,7 @@ export class AuthService {
   login(username: string, password: string) {
     return this.http.post(
       `${this.API_URL}/login`,
-      { username, password },
-      { withCredentials: true } // ✅ indispensable pour gérer JSESSIONID
+      { username, password }
     ).pipe(
       tap((user: any) => {
         console.log("user");

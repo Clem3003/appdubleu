@@ -66,13 +66,13 @@ export class Dashboard implements OnInit {
     {
       id: '',
       username: '',
-      lastname: 'Fiacre',
+      lastname: 'Paquay',
       nickname: ''
     },
     {
       id: '',
       username: '',
-      lastname: 'Nickles',
+      lastname: 'Nyckees',
       nickname: ''
     },
   ]

@@ -5,7 +5,6 @@
 
 
 <!--<h2 class="mt-4 mb-2 mx-5 text-3xl">Bonjour {{ (authService.isBlue()?"bleu":authService.currentUser()?.role) }}</h2>-->
-<h2 class="mt-4 mb-2 mx-5 text-3xl">Bonjour bleu</h2>
 
 @if (authService.isBlue()){
 
@@ -13,7 +12,15 @@
 
 }
 
-<p-card header="Statut" class="m-4">
+<div class="flex flex-row justify-content-end">
+  <h2 class="mt-4 mb-1 mx-4 text-3xl">Bonjour bleu</h2>
+
+  <p-card class="m-4">
+    <div class="flex flex-row align-items-center text-2xl"> 18:13:36</div>
+  </p-card>
+</div>
+
+<p-card header="Statut" class="mx-4">
   <div class="flex flex-row justify-content-between">
     <div class="flex flex-row">
       <!--        <div class="flex align-items-center justify-content-center-->
@@ -42,8 +49,8 @@
   </ng-template>
 </p-card>
 
-<div class="m-4 my-3 flex flex-row justify-content-between">
-  <p-card header="Meilleurs bleus 👑" class="w-9rem">
+<div class="m-4 my-3 flex flex-row justify-content-between gap-2">
+  <p-card header="Meilleurs bleus 👑" class="col-6">
     <div class="flex flex-column mt-4">
     @if (false) {
       @for (best of bests; let i = $index; track best.id){
@@ -57,12 +64,12 @@
       }
     } @else {
       <div class="flex flex-row align-items-start justify-content-between">
-        <div class="flex flex-row align-items-center ml-2">Personne mdr</div>
+        <div class="flex flex-row align-items-center ml-2">Aucun mdr</div>
       </div>
     }
     </div>
   </p-card>
-  <p-card header="Target 🎯" class="w-9rem">
+  <p-card header="Target 🎯" class="col-6">
     <div class="flex flex-column mt-4">
       @for (target of targets; let i = $index; track target.id){
         <div class="flex flex-row align-items-start justify-content-between">
