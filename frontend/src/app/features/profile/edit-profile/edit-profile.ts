@@ -1,4 +1,4 @@
-import {Component, effect, inject, OnInit, WritableSignal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {Avatar} from 'primeng/avatar';
 import {Card} from 'primeng/card';
 import {ButtonDirective} from 'primeng/button';
@@ -38,7 +38,7 @@ export class EditProfile implements  OnInit {
   private readonly router = inject(Router);
 
   private user: WritableSignal<StLoUser | null> = this.authService.currentUser;
-  protected loading: boolean = true;
+  protected loading: WritableSignal<boolean> = signal(true);
 
 
   constructor() {
@@ -68,7 +68,7 @@ export class EditProfile implements  OnInit {
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required)
     }, { validators: [this.passwordsMatchValidator] });
-    this.loading = false;
+    this.loading.set(false);
   }
 
   private passwordsMatchValidator: ValidatorFn = (group: AbstractControl) => {

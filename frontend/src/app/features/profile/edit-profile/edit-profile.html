@@ -14,7 +14,7 @@
         ></p-avatar>
       </div>
       <h3 class="mt-4 mb-2 text-2xl">Profile </h3>
-      @if (!loading) {
+      @if (!loading()) {
         <form [formGroup]="form" class="container-fluid">
         <section class="row justify-content-center">
           <section class="col-12">
