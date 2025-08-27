@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
 import {Card} from 'primeng/card';
 import {Knob} from 'primeng/knob';
 import {FormsModule} from '@angular/forms';
@@ -30,13 +30,16 @@ import {StLoBleu, StLoUser} from '../../user/login/login.model';
   ],
   templateUrl: './dashboard.html',
 })
-export class Dashboard implements OnInit {
+export class Dashboard implements OnInit, OnDestroy {
   protected authService: AuthService = inject(AuthService)
   private dialogService: DialogService = inject(DialogService)
   private http: HttpClient = inject(HttpClient)
 
   protected ref: DynamicDialogRef | undefined;
+  private intervalId: any;
 
+  // signal pour stocker le temps restant (sous forme HH:mm:ss)
+  timeLeft = signal(this.computeTimeLeft());
 
   showScoreInfoDialog() {
     this.ref = this.dialogService.open(ScoreInfoDialog, {
@@ -49,7 +52,6 @@ export class Dashboard implements OnInit {
   protected bests: StLoBleu[] = [
 
   ]
-
   protected targets: StLoBleu[] = [
     {
       id: '',
@@ -138,6 +140,11 @@ export class Dashboard implements OnInit {
 
   ngOnInit() {
 
+    // met à jour chaque seconde
+    this.intervalId = setInterval(() => {
+      this.timeLeft.set(this.computeTimeLeft());
+    }, 1000);
+
     this.responsiveOptions = [
       {
         breakpoint: '1400px',
@@ -162,6 +169,27 @@ export class Dashboard implements OnInit {
     ]
   }
 
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+
+  private computeTimeLeft(): string {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0); // minuit prochain
+
+    const diff = midnight.getTime() - now.getTime();
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return `${this.pad(hours)}:${this.pad(minutes)}:${this.pad(seconds)}`;
+  }
+
+  private pad(n: number): string {
+    return n.toString().padStart(2, '0');
+  }
   // getSeverity(status: string) {
   //   switch (status) {
   //     case 'INSTOCK':

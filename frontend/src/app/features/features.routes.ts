@@ -12,6 +12,7 @@ import {BleuInfo} from './account/bleu-info/bleu-info';
 import {Account} from './account/account';
 import {Conversation} from './forum/private-messages/conversation/conversation';
 import {EditProfile} from './profile/edit-profile/edit-profile';
+import {Informations} from './informations/informations';
 
 const defaultRoutes: Routes = [
   // { path: 'access-denied', component: ErrorComponent, data: { errorCode: 401 } },
@@ -31,6 +32,7 @@ const childrenRoutes: Routes = [
     { path: 'profile', component: Profile },
     { path: 'profile/edit', component: EditProfile },
     { path: 'messages/:userid', component: Conversation },
+    { path: 'infos', component: Informations },
   // {
   //   path: 'evacuation',
   //   data: { ...withBreadcrumb({ label: marker('menu.evacuation'), link: false }) },

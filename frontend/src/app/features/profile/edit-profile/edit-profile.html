@@ -5,6 +5,7 @@
   <!-- Profile Card -->
   <p-card class="border-round-2xl shadow-2 m-4">
     <div class="flex flex-column">
+        <h3 class=" my-4 text-2xl text-center">🚧 Work in progress 🚧</h3>
       <div class="flex align-items-center gap-4">
         <p-avatar
           [image]="'https://primefaces.org/cdn/primeng/images/demo/avatar/elwinsharvill.png'"
@@ -102,8 +103,8 @@
                   class="form-control"
                   placeholder="Mot de passe"
                   autocomplete="off"
-                  required
                 />
+                <p class="font-italic text-xs">*Laisser vide si inchangé</p>
                 <!-- <val-errors controlName="password" /> -->
               </div>
 
@@ -111,13 +112,14 @@
                 <label for="confirmPassword">Confirme ton mot de passe</label>
                 <input
                   formControlName="confirmPassword"
+                  [disabled]="true"
                   id="confirmPassword"
                   type="password"
                   class="form-control"
                   placeholder="Confirmation mdp"
                   autocomplete="off"
-                  required
                 />
+                <p class="font-italic text-xs">*Laisser vide si inchangé</p>
                 <!-- <val-errors controlName="password" /> -->
               </div>
 
