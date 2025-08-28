@@ -43,7 +43,7 @@ public class QuestionService {
         // Récupère l'utilisateur connecté (entité gérée par Hibernate)
         StLoUserEntity userEntity = userRepository
             .findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-            .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+            .orElse(null);
 
         QuestionEntity questionEntity = new QuestionEntity();
         questionEntity.setPrompt(request.getPrompt());
@@ -68,5 +68,9 @@ public class QuestionService {
     }
     public List<Question> getFourRandomActiveQuestions() {
         return this.mapper.toDto(this.repository.findTop4ByActiveTrueOrderByRandom());
+    }
+
+    public boolean existsByQuestionPrompt(String prompt) {
+        return repository.existsByPrompt(prompt);
     }
 }

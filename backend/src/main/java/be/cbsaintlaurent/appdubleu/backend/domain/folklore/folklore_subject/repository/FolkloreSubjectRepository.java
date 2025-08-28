@@ -14,5 +14,7 @@ public interface FolkloreSubjectRepository extends JpaRepository<FolkloreSubject
     FolkloreSubjectEntity findById(UUID id);
 
     boolean existsByTitle(String title);
+
+    FolkloreSubjectEntity findByTitle(String title);
 }
 

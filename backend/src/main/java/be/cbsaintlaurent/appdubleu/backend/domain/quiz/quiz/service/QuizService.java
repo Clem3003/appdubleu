@@ -39,7 +39,7 @@ public class QuizService {
 //        // Récupère l'utilisateur connecté (entité gérée par Hibernate)
 //        StLoUserEntity userEntity = userRepository
 //            .findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-//            .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+//            .orElse(null);
 //
 //        QuestionEntity questionEntity = new QuestionEntity();
 //        questionEntity.setPrompt(request.getPrompt());

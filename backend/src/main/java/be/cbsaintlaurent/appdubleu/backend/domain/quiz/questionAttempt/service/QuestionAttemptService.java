@@ -39,9 +39,15 @@ public class QuestionAttemptService {
     @Transactional
     public QuestionAttempt newQuestionAttempt(NewQuestionAttemptRequest request) {
         // Récupère l'utilisateur connecté (entité gérée par Hibernate)
+        System.out.println("SecurityContextHolder.getContext().getAuthentication().getPrincipal()");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        System.out.println("SecurityContextHolder.getContext().getAuthentication().getName()");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        System.out.println("SecurityContextHolder.getContext().getAuthentication()");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         StLoUserEntity userEntity = userRepository
-                .findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+                .findByUsername(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString())
+                .orElse(null);
 
         QuestionEntity questionEntity = questionRepository.findById(request.getQuestion().getId());
         boolean isAnswerCorrect = isAnswerCorrect(questionEntity, request.getAttemptAnswer());

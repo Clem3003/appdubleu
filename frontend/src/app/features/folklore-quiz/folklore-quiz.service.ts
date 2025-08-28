@@ -16,10 +16,10 @@ export class FolkloreQuizService {
   }
 
   getFourRandomActiveQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(`${this.API_URL}/getFourRandomActiveQuestions`);
+    return this.http.get<Question[]>(`${this.API_URL}/getFourRandomActiveQuestions`, { withCredentials: true });
   }
 
   submitAnswer(request: any) {
-    return this.http.post<QuestionAttemptResponse>(`${this.API_URL}_attempt`, request);
+    return this.http.post<QuestionAttemptResponse>(`${this.API_URL}_attempt`, request, { withCredentials: true });
   }
 }

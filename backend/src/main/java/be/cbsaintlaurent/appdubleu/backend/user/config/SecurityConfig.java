@@ -69,6 +69,7 @@ public class SecurityConfig {
                                 "/api/auth/logout", "/api/auth/me", "/api/auth/ping", "/api/auth/version").permitAll()
 //                        .requestMatchers("/api/user/all-usernames").authenticated()
                         .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/question_attempt/**").authenticated()
 //                        .requestMatchers("/api/**").authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

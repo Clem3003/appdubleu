@@ -42,7 +42,7 @@ public class BaptismalSeasonService {
         // Récupère l'utilisateur connecté (entité gérée par Hibernate)
         StLoUserEntity userEntity = userRepository
                 .findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+                .orElse(null);
 
         // Crée directement l'entité Season
         BaptismalSeasonEntity seasonEntity = new BaptismalSeasonEntity();

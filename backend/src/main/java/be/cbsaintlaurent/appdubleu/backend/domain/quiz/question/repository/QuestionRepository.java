@@ -16,4 +16,6 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Questi
 
     @Query(value = "SELECT * FROM question_entity WHERE active = true ORDER BY random() LIMIT 4", nativeQuery = true)
     List<QuestionEntity> findTop4ByActiveTrueOrderByRandom();
+
+    boolean existsByPrompt(String prompt);
 }

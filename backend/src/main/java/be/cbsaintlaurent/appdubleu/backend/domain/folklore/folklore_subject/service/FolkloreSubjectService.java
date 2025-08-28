@@ -60,7 +60,7 @@ public class FolkloreSubjectService {
         // Récupère l'utilisateur connecté (entité gérée par Hibernate)
         StLoUserEntity userEntity = userRepository
                 .findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+                .orElse(null);
 
         FolkloreSubjectEntity folkloreSubjectEntity = new FolkloreSubjectEntity();
         folkloreSubjectEntity.setTitle(request.getTitle());
@@ -75,8 +75,14 @@ public class FolkloreSubjectService {
         return ResponseEntity.ok(mapper.toDto(response));
     }
 
+    @Transactional
     public boolean existsBySubjectTitle(String title) {
         return repository.existsByTitle(title);
+    }
+
+    @Transactional
+    public FolkloreSubjectEntity findByTitle(String title) {
+        return repository.findByTitle(title);
     }
 }
 
