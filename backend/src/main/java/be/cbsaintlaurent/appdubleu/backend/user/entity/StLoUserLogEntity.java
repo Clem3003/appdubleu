@@ -21,8 +21,8 @@ public class StLoUserLogEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private StLoUserEntity user;
 
     private String username; // Uniquement que ça soit plus lisible en base de donnée

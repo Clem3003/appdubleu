@@ -32,7 +32,6 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 public class AuthController {
-
     private final AuthService authService;
     private final StLoUserLogService logService;
 

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -29,19 +30,43 @@ public class UserActionLoggingAspect {
         Object result = joinPoint.proceed();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        StLoUserEntity user = null;
+        String username = "anonymous";
 
-        if (authentication != null) {
-            StLoUserEntity user = userRepository.findByUsername(authentication.getName()).orElse(null);
-
-            StLoUserLogEntity log = new StLoUserLogEntity();
-            log.setUser(user);
-            log.setUsername(authentication.getName());
-            log.setAction(loggableAction.value());
-            log.setDescription(loggableAction.description());
-            log.setCreatedAt(LocalDateTime.now());
-
-            userLogRepository.save(log);
+        if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
+            System.out.println("authenticated");
+            user = userRepository.findByUsername(authentication.getName()).orElse(null);
+            username = authentication.getName();
         }
+        else {
+            System.out.println("not authenticated");
+
+        }
+
+        StLoUserLogEntity log = new StLoUserLogEntity();
+        log.setUser(user);  // null si anonyme
+        log.setUsername(username);
+        log.setAction(loggableAction.value());
+        log.setDescription(loggableAction.description());
+        log.setCreatedAt(LocalDateTime.now());
+
+        userLogRepository.save(log);
+
+//        if (authentication != null) {
+//            System.out.println("!=null" + authentication + authentication.getName() + authentication.isAuthenticated());
+//            StLoUserEntity user = userRepository.findByUsername(authentication.getName()).orElse(null);
+//
+//            StLoUserLogEntity log = new StLoUserLogEntity();
+//            log.setUser(user);
+//            log.setUsername(authentication.getName());
+//            log.setAction(loggableAction.value());
+//            log.setDescription(loggableAction.description());
+//            log.setCreatedAt(LocalDateTime.now());
+//
+//            userLogRepository.save(log);
+//        } else {
+//            System.out.println("==null");
+//        }
 
         return result;
     }
