@@ -60,7 +60,8 @@ export class LoginForm implements OnInit, OnDestroy {
         if (err.status === 401) {
           this.errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
         } else if (err.status === 403) {
-          this.errorMessage = "Votre compte est désactivé, contactez votre administrateur.";
+          this.errorMessage = "Nom d'utilisateur ou mot de passe incorrect.";
+          // this.errorMessage = "Votre compte est désactivé, contactez votre administrateur.";
         } else {
           this.errorMessage = "Une erreur est survenue, veuillez réessayer plus tard.";
         }

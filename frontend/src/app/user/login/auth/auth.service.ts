@@ -4,6 +4,7 @@ import {RegisterRequest} from '../../register/register.model';
 import {Observable, of, tap} from 'rxjs';
 import {StLoUser} from '../login.model';
 import {Router} from '@angular/router';
+import { BleuRegisterRequest } from '../../bleu-register/bleu-register.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -71,4 +72,7 @@ export class AuthService {
     // return this.currentUser()?.role === 'BLUE';
   }
 
+  registerBleu(request: BleuRegisterRequest) {
+
+  }
 }
