@@ -11,7 +11,7 @@ export class AuthService {
   // private readonly API_URL = 'http://localhost:8080/api/auth'; // TODO : switch dev/prod
   // private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
   // private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
-  private readonly API_URL = 'http://localhost:4200/api/auth'; // TODO : switch dev/prod
+  private readonly API_URL = '/api/auth'; // TODO : switch dev/prod -> PROD
   private router: Router = inject(Router);
 
   constructor(private http: HttpClient) {

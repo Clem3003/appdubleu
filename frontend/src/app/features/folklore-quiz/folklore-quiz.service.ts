@@ -6,8 +6,8 @@ import {Question, QuestionAttemptResponse} from '../../models/question.model';
 @Injectable({ providedIn: 'root' })
 export class FolkloreQuizService {
   // private readonly API_URL = 'https://cbsaintlaurent.be/api/question'; // TODO : SWITCH DEV/PROD
-  // private readonly API_URL = 'http://localhost:8080/api/question'; // TODO : SWITCH DEV/PROD
-  private readonly API_URL = 'http://localhost:4200/api/question'; // TODO : SWITCH DEV/PROD
+  private readonly API_URL = '/api/question'; // TODO : switch dev/prod -> PROD
+  // private readonly API_URL = 'http://localhost:4200/api/question'; // TODO : SWITCH DEV/PROD
 
   private http: HttpClient = inject(HttpClient);
 
